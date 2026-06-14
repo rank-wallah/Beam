@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+/*
+ * Beam design tokens — a calm, premium dark palette (think Linear/Raycast):
+ * near-black canvas, restrained borders, a single confident indigo→cyan accent
+ * reserved for trust/encryption cues.
+ */
+@theme {
+  --color-canvas: #08080b;
+  --color-surface: #0e0e13;
+  --color-surface-2: #15151c;
+  --color-border: #232330;
+  --color-ink: #f4f4f6;
+  --color-ink-muted: #a1a1b0;
+  --color-ink-subtle: #6b6b7b;
+  --color-accent: #6366f1;
+  --color-accent-2: #22d3ee;
+  --color-success: #34d399;
+  --color-danger: #f87171;
+
+  --radius-card: 16px;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(99, 102, 241, 0.12), transparent 60%),
+      var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(99, 102, 241, 0.35);
+  }
+}
+
+/* Subtle moving sheen used on the encryption/trust accents. */
+@keyframes beam-shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.beam-gradient-text {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2), var(--color-accent));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: beam-shimmer 6s linear infinite;
+}

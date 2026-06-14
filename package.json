@@ -1,0 +1,22 @@
+{
+  "name": "beam",
+  "version": "0.1.0",
+  "private": true,
+  "description": "End-to-end encrypted, peer-to-peer file transfer over the internet. No uploads. No accounts.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @beam/server --filter @beam/client dev",
+    "dev:server": "pnpm --filter @beam/server dev",
+    "dev:client": "pnpm --filter @beam/client dev",
+    "build": "pnpm --filter @beam/shared build && pnpm --filter @beam/server build && pnpm --filter @beam/client build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
