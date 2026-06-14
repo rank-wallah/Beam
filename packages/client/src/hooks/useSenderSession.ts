@@ -34,8 +34,14 @@ export function useSenderSession(): UseSender {
     session.on('state', setState);
     session.on('progress', setProgress);
     session.on('room', setRoom);
-    session.on('error', setError);
-    void session.start(files).catch((e: Error) => setError(e.message));
+    session.on('error', (msg) => {
+      setError(msg);
+      setState('error');
+    });
+    void session.start(files).catch((e: Error) => {
+      setError(e.message);
+      setState('error');
+    });
   }, []);
 
   return { state, progress, room, error, start };

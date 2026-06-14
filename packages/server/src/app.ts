@@ -50,6 +50,15 @@ export async function buildApp(options: BuildAppOptions = {}): Promise<BuiltApp>
   });
   await app.register(websocket);
 
+  // The signaling server is an API, not the website. A friendly root response
+  // avoids confusion when someone opens http://localhost:8787 in a browser.
+  app.get('/', async () => ({
+    service: 'beam-signaling',
+    status: 'ok',
+    note: 'This is the Beam signaling API. The app runs on the client (default http://localhost:5173).',
+    endpoints: ['/health', '/ice', '/ws'],
+  }));
+
   app.get('/health', async () => ({ status: 'ok', uptime: process.uptime() }));
 
   // The encryption key never reaches here — clients fetch ICE config only.

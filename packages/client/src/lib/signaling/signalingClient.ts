@@ -37,7 +37,10 @@ export class SignalingClient {
   private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
 
   /** Pending one-shot resolvers for create/join request-response pairs. */
-  private pendingCreate: ((roomId: string) => void) | null = null;
+  private pendingCreate: {
+    resolve: (roomId: string) => void;
+    reject: (err: Error) => void;
+  } | null = null;
   private pendingJoin: {
     resolve: (roomId: string) => void;
     reject: (err: Error) => void;
@@ -108,7 +111,7 @@ export class SignalingClient {
 
     switch (msg.type) {
       case 'room-created':
-        this.pendingCreate?.(msg.roomId);
+        this.pendingCreate?.resolve(msg.roomId);
         this.pendingCreate = null;
         break;
       case 'room-joined':
@@ -125,10 +128,14 @@ export class SignalingClient {
         this.emitter.emit('signal', { roomId: msg.roomId, data: msg.data });
         break;
       case 'error':
-        // A pending join is the most likely victim of an error response.
+        // Fail any in-flight create/join so callers don't hang forever.
         if (this.pendingJoin) {
           this.pendingJoin.reject(new Error(msg.message));
           this.pendingJoin = null;
+        }
+        if (this.pendingCreate) {
+          this.pendingCreate.reject(new Error(msg.message));
+          this.pendingCreate = null;
         }
         this.emitter.emit('error', { code: msg.code, message: msg.message });
         break;
@@ -141,8 +148,11 @@ export class SignalingClient {
 
   /** Create a new room; resolves with the server-assigned room id. */
   createRoom(): Promise<{ roomId: string; role: PeerRole }> {
-    return new Promise((resolve) => {
-      this.pendingCreate = (roomId) => resolve({ roomId, role: 'sender' });
+    return new Promise((resolve, reject) => {
+      this.pendingCreate = {
+        resolve: (roomId) => resolve({ roomId, role: 'sender' }),
+        reject,
+      };
       this.send({ type: 'create-room' });
     });
   }

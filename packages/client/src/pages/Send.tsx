@@ -91,6 +91,13 @@ function ShareAndProgress({
             </p>
           )}
 
+          {!sender.room && !isError && sender.state !== 'preparing' && (
+            <p className="flex items-center gap-2 text-sm text-[var(--color-ink-muted)]">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Creating your secure room…
+            </p>
+          )}
+
           {sender.room && !isComplete && (
             <div className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
               <div className="space-y-4">

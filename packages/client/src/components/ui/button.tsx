@@ -1,6 +1,6 @@
 /**
- * Button — a small shadcn-style primitive (cva variants + Radix Slot) so we get
- * consistent, accessible buttons without pulling the whole shadcn CLI.
+ * Button — minimal, premium. White primary on dark (the calm, confident
+ * choice), quiet glass/ghost secondaries. Generous hit targets, ~100ms feel.
  */
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
@@ -8,22 +8,25 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98]',
+  'group/btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[11px] font-sans font-medium transition-all duration-150 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-45',
   {
     variants: {
       variant: {
         primary:
-          'bg-[var(--color-accent)] text-white shadow-[0_8px_30px_-12px_rgba(99,102,241,0.7)] hover:bg-indigo-500',
+          'bg-[var(--color-ink)] text-[#070b16] hover:bg-white',
         secondary:
-          'bg-[var(--color-surface-2)] text-[var(--color-ink)] border border-[var(--color-border)] hover:border-[var(--color-ink-subtle)]',
-        ghost: 'text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface-2)]',
+          'border border-white/12 bg-white/[0.03] text-[var(--color-ink)] hover:bg-white/[0.07]',
+        ghost:
+          'text-[var(--color-ink-soft)] hover:bg-white/[0.05] hover:text-[var(--color-ink)]',
         outline:
-          'border border-[var(--color-border)] text-[var(--color-ink)] hover:bg-[var(--color-surface-2)]',
+          'border border-white/12 text-[var(--color-ink)] hover:border-white/25',
+        accent:
+          'bg-[var(--color-signal)] text-white hover:bg-[var(--color-signal-deep)]',
       },
       size: {
-        sm: 'h-9 px-3',
-        md: 'h-11 px-5',
-        lg: 'h-12 px-7 text-base',
+        sm: 'h-9 px-4 text-[0.8125rem]',
+        md: 'h-11 px-5 text-sm',
+        lg: 'h-12 px-6 text-[0.95rem]',
         icon: 'h-10 w-10',
       },
     },

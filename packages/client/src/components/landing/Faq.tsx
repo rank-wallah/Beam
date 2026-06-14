@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const FAQS = [
@@ -10,7 +10,7 @@ const FAQS = [
   },
   {
     q: 'What stops Beam from reading my files?',
-    a: 'The AES-256 encryption key is generated on your device and travels only in the share link’s URL fragment (after the #). Browsers never send the fragment to any server, so Beam literally never sees the key or the plaintext.',
+    a: 'The AES-256 key is generated on your device and travels only in the share link’s URL fragment (after the #). Browsers never send the fragment to any server, so Beam literally never sees the key or the plaintext.',
   },
   {
     q: 'What happens if the connection drops mid-transfer?',
@@ -35,27 +35,34 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="scroll-mt-20 space-y-8 py-16">
-      <div className="space-y-2">
-        <p className="text-sm font-medium text-[var(--color-accent-2)]">FAQ</p>
-        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">Questions, answered</h2>
+    <section id="faq" className="scroll-mt-20 border-b border-[var(--color-line)] py-16">
+      <div className="mb-10 flex items-center gap-3">
+        <span className="eyebrow text-[var(--color-signal)]">—</span>
+        <span className="eyebrow text-[var(--color-ink-faint)]">Frequently asked</span>
       </div>
 
-      <div className="divide-y divide-[var(--color-border)] overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-border)] bg-[var(--color-surface)]">
+      <div className="border-t border-[var(--color-line)]">
         {FAQS.map((item, i) => {
           const isOpen = open === i;
           return (
-            <div key={item.q}>
+            <div key={item.q} className="border-b border-[var(--color-line)]">
               <button
                 onClick={() => setOpen(isOpen ? null : i)}
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left sm:px-6"
+                className="flex w-full items-center justify-between gap-6 py-5 text-left"
                 aria-expanded={isOpen}
               >
-                <span className="font-medium text-[var(--color-ink)]">{item.q}</span>
-                <ChevronDown
+                <span
                   className={cn(
-                    'h-4 w-4 shrink-0 text-[var(--color-ink-subtle)] transition-transform',
-                    isOpen && 'rotate-180',
+                    'font-display text-lg transition-colors sm:text-xl',
+                    isOpen ? 'text-[var(--color-ink)]' : 'text-[var(--color-ink-soft)]',
+                  )}
+                >
+                  {item.q}
+                </span>
+                <Plus
+                  className={cn(
+                    'h-4 w-4 shrink-0 text-[var(--color-signal)] transition-transform duration-300',
+                    isOpen && 'rotate-45',
                   )}
                 />
               </button>
@@ -67,7 +74,7 @@ export function Faq() {
                     exit={{ height: 0, opacity: 0 }}
                     className="overflow-hidden"
                   >
-                    <p className="px-5 pb-5 text-sm leading-relaxed text-[var(--color-ink-muted)] sm:px-6">
+                    <p className="max-w-2xl pb-6 text-sm leading-relaxed text-[var(--color-ink-soft)]">
                       {item.a}
                     </p>
                   </motion.div>

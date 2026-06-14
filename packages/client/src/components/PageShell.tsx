@@ -3,60 +3,71 @@ import { Link } from 'react-router-dom';
 import { Brand } from './Brand';
 import { DEV_INFO } from '@/config/dev';
 
-/** Shared page chrome: header with brand + nav, and a centered content column. */
+const NAV = [
+  { href: '/#how', label: 'How it works' },
+  { href: '/#faq', label: 'FAQ' },
+  { href: '/#support', label: 'Support' },
+];
+
+/** Shared page chrome: minimal header, centered column, quiet footer. */
 export function PageShell({ children, narrow = false }: { children: ReactNode; narrow?: boolean }) {
   return (
     <div className="flex min-h-full flex-col">
-      <header className="sticky top-0 z-20 border-b border-[var(--color-border)]/60 bg-[var(--color-canvas)]/70 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5">
+      <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-[var(--color-paper)]/70 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
           <Brand />
-          <nav className="flex items-center gap-1 text-sm">
-            <a
-              href="/#how"
-              className="hidden rounded-lg px-3 py-2 text-[var(--color-ink-muted)] transition-colors hover:text-[var(--color-ink)] sm:inline-block"
-            >
-              How it works
-            </a>
-            <a
-              href="/#faq"
-              className="hidden rounded-lg px-3 py-2 text-[var(--color-ink-muted)] transition-colors hover:text-[var(--color-ink)] sm:inline-block"
-            >
-              FAQ
-            </a>
-            <a
-              href="/#support"
-              className="hidden rounded-lg px-3 py-2 text-[var(--color-ink-muted)] transition-colors hover:text-[var(--color-ink)] sm:inline-block"
-            >
-              Support
-            </a>
+          <nav className="flex items-center gap-7">
+            {NAV.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="link-ul hidden text-sm text-[var(--color-ink-soft)] transition-colors hover:text-[var(--color-ink)] sm:inline-block"
+              >
+                {item.label}
+              </a>
+            ))}
             <Link
               to="/send"
-              className="rounded-lg px-3 py-2 text-[var(--color-ink-muted)] transition-colors hover:text-[var(--color-ink)]"
+              className="rounded-[10px] border border-white/12 bg-white/[0.03] px-4 py-2 text-sm font-medium text-[var(--color-ink)] transition-colors hover:bg-white/[0.07]"
             >
-              Send
+              Send a file
             </Link>
           </nav>
         </div>
       </header>
 
-      <main className="mx-auto w-full flex-1 px-5 py-10 sm:py-16">
-        <div className={narrow ? 'mx-auto max-w-xl' : 'mx-auto max-w-6xl'}>{children}</div>
+      <main className="mx-auto w-full flex-1 px-6 py-14 sm:py-20">
+        <div className={narrow ? 'mx-auto max-w-2xl' : 'mx-auto max-w-6xl'}>{children}</div>
       </main>
 
-      <footer className="border-t border-[var(--color-border)]/60">
-        <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-[var(--color-ink-subtle)] sm:flex-row">
-          <span>Beam — peer-to-peer, end-to-end encrypted file transfer.</span>
-          <span>
-            Built by{' '}
-            <a
-              href={DEV_INFO.portfolioUrl}
-              target="_blank"
-              rel="noopener"
-              className="text-[var(--color-ink-muted)] underline-offset-4 transition-colors hover:text-[var(--color-ink)] hover:underline"
-            >
-              {DEV_INFO.name}
-            </a>
-          </span>
+      <footer className="border-t border-white/[0.06]">
+        <div className="mx-auto w-full max-w-6xl px-6 py-10">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <Brand />
+            <p className="max-w-xs text-sm leading-relaxed text-[var(--color-ink-faint)]">
+              Encrypted, peer-to-peer file transfer. No uploads. No accounts.
+            </p>
+          </div>
+          <hr className="rule my-7" />
+          <div className="flex flex-col gap-4 text-sm text-[var(--color-ink-faint)] sm:flex-row sm:items-center sm:justify-between">
+            <span>© {new Date().getFullYear()} Beam</span>
+            <nav className="flex items-center gap-6">
+              <Link to="/privacy" className="link-ul hover:text-[var(--color-ink)]">
+                Privacy
+              </Link>
+              <Link to="/terms" className="link-ul hover:text-[var(--color-ink)]">
+                Terms
+              </Link>
+              <a
+                href={DEV_INFO.portfolioUrl}
+                target="_blank"
+                rel="noopener"
+                className="link-ul font-medium text-[var(--color-ink-soft)] hover:text-[var(--color-ink)]"
+              >
+                Built by {DEV_INFO.name}
+              </a>
+            </nav>
+          </div>
         </div>
       </footer>
     </div>

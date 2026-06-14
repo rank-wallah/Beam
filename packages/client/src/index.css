@@ -1,25 +1,50 @@
 @import 'tailwindcss';
 
 /*
- * Beam design tokens — a calm, premium dark palette (think Linear/Raycast):
- * near-black canvas, restrained borders, a single confident indigo→cyan accent
- * reserved for trust/encryption cues.
+ * ─────────────────────────────────────────────────────────────────────────
+ * BEAM — quiet, editorial, premium. Linear/Vercel restraint. Monochrome
+ * luxury: near-black canvas, off-white ink, silver/white accent (no blue, no
+ * orange). Color is carried by the Three.js hero centerpiece, not the UI.
+ * Glass surfaces, generous negative space, hairline rules.
+ * Display: Libre Caslon Text. Text/UI: Manrope.
+ * ─────────────────────────────────────────────────────────────────────────
  */
 @theme {
-  --color-canvas: #08080b;
-  --color-surface: #0e0e13;
-  --color-surface-2: #15151c;
-  --color-border: #232330;
+  --font-display: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Canvas + ink (near-black, faint cool neutral) */
+  --color-paper: #070708;
+  --color-panel: #0f0f12;
+  --color-paper-2: #17171b;
   --color-ink: #f4f4f6;
-  --color-ink-muted: #a1a1b0;
-  --color-ink-subtle: #6b6b7b;
-  --color-accent: #6366f1;
-  --color-accent-2: #22d3ee;
-  --color-success: #34d399;
-  --color-danger: #f87171;
+  --color-ink-soft: #9a9aa3;
+  --color-ink-faint: #5e5e67;
+  --color-line: #1b1b1f;
+  --color-line-strong: #2c2c33;
+
+  /* Monochrome accent + semantic colors (sparingly) */
+  --color-signal: #f4f4f6; /* white/silver — the "accent" is light itself */
+  --color-signal-deep: #d6d6db;
+  --color-positive: #4ade80; /* live / verified */
+  --color-danger: #f0686a;
 
   --radius-card: 16px;
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+/* Back-compat aliases for any surface still referencing older names. */
+:root {
+  --color-canvas: var(--color-paper);
+  --color-surface: var(--color-panel);
+  --color-surface-2: var(--color-paper-2);
+  --color-border: var(--color-line);
+  --color-ink-muted: var(--color-ink-soft);
+  --color-ink-subtle: var(--color-ink-faint);
+  --color-accent: var(--color-signal);
+  --color-accent-2: var(--color-signal);
+  --color-success: var(--color-positive);
+  --color-cobalt: var(--color-signal);
 }
 
 @layer base {
@@ -33,33 +58,136 @@
     height: 100%;
   }
 
+  /* Lenis smooth-scroll base styles. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
   body {
     margin: 0;
-    background:
-      radial-gradient(1200px 600px at 50% -10%, rgba(99, 102, 241, 0.12), transparent 60%),
-      var(--color-canvas);
+    background-color: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-sans);
+    font-weight: 400;
+    letter-spacing: -0.005em;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
+  /* Whisper-quiet film grain for depth. */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  /* Soft cinematic glow, top-center. */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(1000px 560px at 50% -14%, rgba(255, 255, 255, 0.06), transparent 72%);
+  }
+
+  #root {
+    position: relative;
+    z-index: 1;
+  }
+
   ::selection {
-    background: rgba(99, 102, 241, 0.35);
+    background: rgba(255, 255, 255, 0.22);
+    color: #fff;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  *:focus-visible {
+    outline: 1.5px solid var(--color-signal);
+    outline-offset: 3px;
+  }
+
+  /* Thin, unobtrusive scrollbar. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line-strong) transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: var(--color-line-strong);
+    border-radius: 99px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
   }
 }
 
-/* Subtle moving sheen used on the encryption/trust accents. */
-@keyframes beam-shimmer {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
+/* ── Utilities ─────────────────────────────────────────────────── */
+
+/* Small uppercase Manrope label / eyebrow. */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-.beam-gradient-text {
-  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2), var(--color-accent));
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: beam-shimmer 6s linear infinite;
+.rule {
+  border: none;
+  border-top: 1px solid var(--color-line);
+}
+
+/* Glass surface — the premium card treatment (no blur: keeps scroll smooth). */
+.glass {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Soft edge-fade mask for the WebGL canvas so it dissolves into the page. */
+.fade-mask {
+  -webkit-mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, #000 55%, transparent 82%);
+  mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, #000 55%, transparent 82%);
+}
+
+.serif {
+  font-family: var(--font-display);
+}
+.serif-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+/* Quiet animated underline for links. */
+.link-ul {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-ul:hover {
+  background-size: 100% 1px;
 }

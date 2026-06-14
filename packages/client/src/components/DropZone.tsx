@@ -1,5 +1,4 @@
 import { useRef, useState, type DragEvent } from 'react';
-import { motion } from 'framer-motion';
 import { UploadCloud, FolderUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { gatherFilesFromDataTransfer } from '@/lib/files';
@@ -22,9 +21,7 @@ export function DropZone({ onFiles }: { onFiles: (files: File[]) => void }) {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
+    <div
       onDragOver={(e) => {
         e.preventDefault();
         setDragging(true);
@@ -34,22 +31,25 @@ export function DropZone({ onFiles }: { onFiles: (files: File[]) => void }) {
       className={cn(
         'relative flex flex-col items-center justify-center gap-5 rounded-[var(--radius-card)] border border-dashed px-6 py-16 text-center transition-colors',
         dragging
-          ? 'border-[var(--color-accent)] bg-[rgba(99,102,241,0.06)]'
-          : 'border-[var(--color-border)] bg-[var(--color-surface)]',
+          ? 'border-white/40 bg-white/[0.05]'
+          : 'border-[var(--color-line-strong)] bg-white/[0.02]',
       )}
     >
-      <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--color-surface-2)] ring-1 ring-[var(--color-border)]">
-        <UploadCloud className="h-7 w-7 text-[var(--color-accent-2)]" />
+      <div className="dotgrid pointer-events-none absolute inset-0 rounded-[var(--radius-card)] opacity-20" />
+
+      <div className="relative flex h-14 w-14 items-center justify-center rounded-[3px] border border-[var(--color-line-strong)] bg-[var(--color-paper)]">
+        <UploadCloud
+          className={cn(
+            'h-6 w-6 transition-colors',
+            dragging ? 'text-[var(--color-signal)]' : 'text-[var(--color-ink-soft)]',
+          )}
+        />
       </div>
-      <div className="space-y-1.5">
-        <p className="text-lg font-medium text-[var(--color-ink)]">
-          Drop files or folders to send
-        </p>
-        <p className="text-sm text-[var(--color-ink-subtle)]">
-          They're encrypted in your browser before they leave your device.
-        </p>
+      <div className="relative space-y-1.5">
+        <p className="font-display text-xl text-[var(--color-ink)]">Drop files or folders</p>
+        <p className="eyebrow text-[var(--color-ink-faint)]">encrypted before they leave your device</p>
       </div>
-      <div className="flex flex-wrap items-center justify-center gap-3">
+      <div className="relative flex flex-wrap items-center justify-center gap-3">
         <Button onClick={() => fileInput.current?.click()}>
           <UploadCloud className="h-4 w-4" /> Choose files
         </Button>
@@ -75,6 +75,6 @@ export function DropZone({ onFiles }: { onFiles: (files: File[]) => void }) {
         multiple
         onChange={(e) => e.target.files && onFiles(Array.from(e.target.files))}
       />
-    </motion.div>
+    </div>
   );
 }

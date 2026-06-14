@@ -15,7 +15,7 @@ export function StatusStepper({
   failed?: boolean;
 }) {
   return (
-    <ol className="flex flex-wrap items-center gap-x-2 gap-y-2 text-sm">
+    <ol className="flex flex-wrap items-center gap-x-2 gap-y-2">
       {steps.map((label, i) => {
         const done = i < current;
         const active = i === current;
@@ -23,24 +23,30 @@ export function StatusStepper({
           <li key={label} className="flex items-center gap-2">
             <span
               className={cn(
-                'flex h-6 w-6 items-center justify-center rounded-full border text-xs',
-                done && 'border-[var(--color-success)] bg-[var(--color-success)]/15 text-[var(--color-success)]',
-                active && !failed && 'border-[var(--color-accent)] bg-[var(--color-accent)]/15 text-[var(--color-accent-2)]',
+                'flex h-5 w-5 items-center justify-center rounded-full border text-[10px] font-mono',
+                done && 'border-[var(--color-positive)] bg-[var(--color-positive)]/15 text-[var(--color-positive)]',
+                active && !failed && 'border-[var(--color-signal)] bg-[var(--color-signal)]/15 text-[var(--color-signal)]',
                 active && failed && 'border-[var(--color-danger)] text-[var(--color-danger)]',
-                !done && !active && 'border-[var(--color-border)] text-[var(--color-ink-subtle)]',
+                !done && !active && 'border-[var(--color-line-strong)] text-[var(--color-ink-faint)]',
               )}
             >
-              {done ? <Check className="h-3.5 w-3.5" /> : active && !failed ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : i + 1}
+              {done ? (
+                <Check className="h-3 w-3" />
+              ) : active && !failed ? (
+                <Loader2 className="h-3 w-3 animate-spin" />
+              ) : (
+                i + 1
+              )}
             </span>
             <span
               className={cn(
-                active ? 'text-[var(--color-ink)]' : 'text-[var(--color-ink-subtle)]',
-                'font-medium',
+                'eyebrow',
+                active ? 'text-[var(--color-ink)]' : 'text-[var(--color-ink-faint)]',
               )}
             >
               {label}
             </span>
-            {i < steps.length - 1 && <span className="mx-1 h-px w-5 bg-[var(--color-border)]" />}
+            {i < steps.length - 1 && <span className="mx-1 h-px w-4 bg-[var(--color-line-strong)]" />}
           </li>
         );
       })}
