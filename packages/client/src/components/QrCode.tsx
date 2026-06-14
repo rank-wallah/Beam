@@ -28,13 +28,19 @@ export function QrCode({ value, size = 200 }: { value: string; size?: number }) 
 
   return (
     <div
-      className="overflow-hidden rounded-2xl bg-white p-3 shadow-lg"
-      style={{ width: size + 24, height: size + 24 }}
+      className="max-w-full shrink-0 overflow-hidden rounded-xl bg-white p-3 shadow-lg"
+      style={{ width: size + 24 }}
     >
       {dataUrl ? (
-        <img src={dataUrl} alt="QR code for the share link" width={size} height={size} />
+        <img
+          src={dataUrl}
+          alt="QR code for the share link"
+          width={size}
+          height={size}
+          className="block h-auto w-full"
+        />
       ) : (
-        <div className="h-full w-full animate-pulse rounded bg-zinc-200" />
+        <div className="aspect-square w-full animate-pulse rounded bg-zinc-200" />
       )}
     </div>
   );

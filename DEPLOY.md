@@ -76,16 +76,30 @@ Wait for it to resolve: `dig +short beam.kroszborg.co` should return the IP.
 gcloud compute ssh beam --zone=us-central1-a
 ```
 
-Install Node 20+, pnpm, Redis, nginx, certbot:
+Install Node 22+, pnpm, Redis, nginx, certbot:
+
+> **Use Node 22, not 20.** corepack installs the latest pnpm (v11+), which
+> requires Node ≥ 22.13 (it uses the `node:sqlite` built-in). On Node 20 you'll
+> hit `ERR_UNKNOWN_BUILTIN_MODULE: node:sqlite`.
 
 ```bash
 sudo apt update && sudo apt upgrade -y
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 sudo apt install -y nodejs redis-server nginx git
+node -v                                   # must be v22.x
 sudo corepack enable                      # provides pnpm
 sudo apt install -y certbot python3-certbot-nginx
 
 sudo systemctl enable --now redis-server
+```
+
+If you already installed Node 20, switch to 22 first:
+
+```bash
+sudo apt remove -y nodejs
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install -y nodejs
+node -v                                   # v22.x
 ```
 
 ---
@@ -94,9 +108,15 @@ sudo systemctl enable --now redis-server
 
 ```bash
 sudo mkdir -p /opt/beam && sudo chown $USER /opt/beam
-git clone <your-repo-url> /opt/beam
+git clone https://github.com/Kroszborg/beam /opt/beam
 cd /opt/beam
 pnpm install --frozen-lockfile
+
+# pnpm 11 blocks unapproved build scripts (esbuild) and errors when running a
+# script. The repo allow-lists esbuild via package.json > pnpm.onlyBuiltDependencies,
+# so a normal install builds it. If you still hit ERR_PNPM_IGNORED_BUILDS, either
+# run `pnpm approve-builds` (select esbuild) once, or build vite directly:
+#   cd packages/client && ./node_modules/.bin/vite build && cd ../..
 
 # Build the client pointing at the public origin (same host).
 # The client turns https:// into wss:// and calls /ws + /ice automatically.

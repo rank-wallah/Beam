@@ -36,9 +36,10 @@ export function SendPage() {
   return (
     <PageShell narrow>
       <div className="space-y-6">
-        <header className="space-y-2">
-          <h1 className="text-2xl font-semibold tracking-tight">Send files</h1>
-          <p className="text-sm text-[var(--color-ink-muted)]">
+        <header className="space-y-3">
+          <span className="eyebrow text-[var(--color-ink-faint)]">Sender</span>
+          <h1 className="font-display text-[2.4rem] leading-tight tracking-tight">Send files</h1>
+          <p className="text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
             Encrypted in your browser, sent directly to the receiver. Nothing is uploaded.
           </p>
         </header>
@@ -99,28 +100,27 @@ function ShareAndProgress({
           )}
 
           {sender.room && !isComplete && (
-            <div className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
-              <div className="space-y-4">
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+              {/* min-w-0 lets the long URL truncate instead of forcing width */}
+              <div className="min-w-0 flex-1 space-y-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs uppercase tracking-wide text-[var(--color-ink-subtle)]">
-                    Share link
-                  </label>
-                  <div className="flex items-center gap-2">
-                    <code className="flex-1 truncate rounded-lg border border-[var(--color-border)] bg-[var(--color-surface-2)] px-3 py-2 text-xs text-[var(--color-ink)]">
-                      {sender.room.shareUrl}
-                    </code>
-                  </div>
+                  <span className="eyebrow text-[var(--color-ink-faint)]">Share link</span>
+                  <code className="block w-full truncate rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2.5 font-mono text-xs text-[var(--color-ink-soft)]">
+                    {sender.room.shareUrl}
+                  </code>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <CopyButton value={sender.room.shareUrl} label="Copy link" />
                   <CopyButton value={sender.room.roomId} label="Copy room code" />
                 </div>
-                <p className="text-xs text-[var(--color-ink-subtle)]">
-                  Keep this tab open until the transfer completes. The key lives only in this link.
+                <p className="text-xs leading-relaxed text-[var(--color-ink-faint)]">
+                  Keep this tab open until the transfer completes. The key lives only in this link —
+                  anyone with it can receive the files.
                 </p>
               </div>
-              <div className="flex justify-center">
-                <QrCode value={sender.room.shareUrl} />
+
+              <div className="flex shrink-0 justify-center sm:justify-end">
+                <QrCode value={sender.room.shareUrl} size={168} />
               </div>
             </div>
           )}

@@ -5,7 +5,10 @@
   "description": "End-to-end encrypted, peer-to-peer file transfer over the internet. No uploads. No accounts.",
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
   },
   "scripts": {
     "dev": "pnpm --parallel --filter @beam/server --filter @beam/client dev",
