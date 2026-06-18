@@ -83,7 +83,12 @@ function ShareAndProgress({
     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="space-y-5">
       <Card>
         <CardContent className="space-y-5">
-          <StatusStepper steps={STEPS} current={STEP_INDEX[sender.state] ?? 0} failed={isError} />
+          <StatusStepper
+            steps={STEPS}
+            current={STEP_INDEX[sender.state] ?? 0}
+            failed={isError}
+            complete={isComplete}
+          />
 
           {sender.state === 'preparing' && (
             <p className="flex items-center gap-2 text-sm text-[var(--color-ink-muted)]">

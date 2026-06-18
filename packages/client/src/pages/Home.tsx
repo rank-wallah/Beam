@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useRef, type ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
@@ -13,10 +13,6 @@ import { AboutDev } from '@/components/landing/AboutDev';
 import { Faq } from '@/components/landing/Faq';
 
 gsap.registerPlugin(ScrollTrigger);
-
-const ParticleField = lazy(() =>
-  import('@/components/webgl/ParticleField').then((m) => ({ default: m.ParticleField })),
-);
 
 const HOW = [
   { n: '01', title: 'Encrypt locally', body: 'Files are encrypted in your browser before a single byte ever leaves your device.' },
@@ -35,18 +31,15 @@ const ease = [0.22, 1, 0.36, 1] as const;
 
 export function HomePage() {
   const heroRef = useRef<HTMLElement>(null);
-  const sphereRef = useRef<HTMLDivElement>(null);
+  const auraRef = useRef<HTMLDivElement>(null);
 
-  // GSAP scroll parallax: the sphere drifts up + scales gently as you leave the
-  // hero. Transform only — NOT opacity (Framer owns the entrance fade), so the
-  // two animators never fight and the sphere stays fully visible at rest.
+  // Subtle scroll parallax on the ambient background (transform only).
   useEffect(() => {
-    if (!heroRef.current || !sphereRef.current) return;
+    if (!heroRef.current || !auraRef.current) return;
     const ctx = gsap.context(() => {
-      gsap.to(sphereRef.current, {
+      gsap.to(auraRef.current, {
         scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: 1 },
-        yPercent: -12,
-        scale: 1.12,
+        yPercent: -10,
         ease: 'none',
       });
     });
@@ -55,44 +48,33 @@ export function HomePage() {
 
   return (
     <PageShell>
-      {/* ── Hero — sphere lives BEHIND the text ──────────────── */}
+      {/* ── Hero — lightweight ambient light, text always on top ── */}
       <section
         ref={heroRef}
-        className="relative flex min-h-[88vh] flex-col items-center justify-center text-center"
+        className="relative flex min-h-[86vh] flex-col items-center justify-center text-center"
       >
-        {/* Soft luminous halo behind the sphere */}
-        <div
-          className="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[70vmin] w-[70vmin] max-h-[680px] max-w-[680px] -translate-x-1/2 -translate-y-1/2 rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.06), transparent 64%)' }}
-          aria-hidden
-        />
-
-        {/* WebGL backdrop. Outer div = GSAP scroll transform; inner motion.div
-            = entrance fade. Separate elements so the two animators never fight
-            (that was erasing the sphere on scroll). Padding keeps the sphere
-            clear of the edges so it's never clipped. */}
-        <div
-          ref={sphereRef}
-          className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center p-6 sm:p-12"
-          aria-hidden
-        >
+        {/* Ambient background: faded grid + slow-drifting light blobs. Pure CSS —
+            light, reliable on every device, and always behind the text. */}
+        <div ref={auraRef} className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+          <div className="dotgrid absolute inset-0 opacity-[0.12] [mask-image:radial-gradient(ellipse_60%_55%_at_50%_42%,#000,transparent_78%)]" />
           <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.8, ease, delay: 0.2 }}
-            className="aspect-square w-full max-w-[760px]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.6, ease }}
+            className="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2"
           >
-            <Suspense fallback={null}>
-              <ParticleField />
-            </Suspense>
+            <div
+              className="animate-float-slow h-[44rem] w-[44rem] rounded-full blur-[120px]"
+              style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.07), transparent 60%)' }}
+            />
           </motion.div>
+          <div className="absolute left-[64%] top-[58%] -translate-x-1/2 -translate-y-1/2">
+            <div
+              className="animate-float-slower h-[26rem] w-[26rem] rounded-full blur-[120px]"
+              style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.045), transparent 62%)' }}
+            />
+          </div>
         </div>
-
-        {/* Soft, blurred darkening behind the text — smooth, no banding rings */}
-        <div
-          className="pointer-events-none absolute left-1/2 top-1/2 z-[1] h-[58%] w-[92%] max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-[50%] bg-[var(--color-paper)]/45 blur-[80px]"
-          aria-hidden
-        />
 
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center px-1">

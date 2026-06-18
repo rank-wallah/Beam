@@ -46,7 +46,12 @@ export function ReceivePage() {
         <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
           <Card>
             <CardContent className="space-y-5">
-              <StatusStepper steps={STEPS} current={STEP_INDEX[state]} failed={isError} />
+              <StatusStepper
+                steps={STEPS}
+                current={STEP_INDEX[state]}
+                failed={isError}
+                complete={isComplete}
+              />
 
               {(state === 'joining' || state === 'connecting' || state === 'connected') && (
                 <p className="flex items-center gap-2 text-sm text-[var(--color-ink-muted)]">

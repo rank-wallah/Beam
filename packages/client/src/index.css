@@ -172,6 +172,19 @@
   mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, #000 55%, transparent 82%);
 }
 
+/* Slow, organic drift for the hero's ambient light blobs. */
+@keyframes float-slow {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(2.5%, -3.5%); }
+  66% { transform: translate(-3%, 2%); }
+}
+.animate-float-slow {
+  animation: float-slow 16s ease-in-out infinite;
+}
+.animate-float-slower {
+  animation: float-slow 22s ease-in-out infinite reverse;
+}
+
 .serif {
   font-family: var(--font-display);
 }
