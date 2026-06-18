@@ -7,9 +7,6 @@
   "engines": {
     "node": ">=22"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": ["esbuild"]
-  },
   "scripts": {
     "dev": "pnpm --parallel --filter @beam/server --filter @beam/client dev",
     "dev:server": "pnpm --filter @beam/server dev",

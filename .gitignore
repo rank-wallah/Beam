@@ -27,3 +27,8 @@ Thumbs.db
 # Test / coverage
 coverage/
 .vitest/
+
+# Dev screenshots / scratch output
+shot-*.png
+*.out.log
+*.err.log

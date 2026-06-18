@@ -157,7 +157,8 @@ After=network.target redis-server.service
 [Service]
 WorkingDirectory=/opt/beam
 EnvironmentFile=/opt/beam/.env
-ExecStart=/opt/beam/node_modules/.bin/tsx packages/server/src/index.ts
+# Path to tsx — confirm with: find /opt/beam -path '*/node_modules/.bin/tsx'
+ExecStart=/opt/beam/packages/server/node_modules/.bin/tsx /opt/beam/packages/server/src/index.ts
 Restart=always
 RestartSec=3
 User=www-data
@@ -167,8 +168,10 @@ Group=www-data
 WantedBy=multi-user.target
 ```
 
+> No `chown` needed: pnpm installs world-readable files, so `www-data` can run
+> the server while you keep ownership of `/opt/beam` for `git pull`.
+
 ```bash
-sudo chown -R www-data:www-data /opt/beam
 sudo systemctl daemon-reload
 sudo systemctl enable --now beam-server
 sudo systemctl status beam-server          # should be "active (running)"
