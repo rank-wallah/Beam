@@ -17,8 +17,15 @@ export function buildIceConfig(): IceConfigResponse {
   }
 
   if (config.turn) {
+    // TURN_URL may be a comma-separated list of endpoints (e.g. :80, :443,
+    // ?transport=tcp). Handing the browser several endpoints sharing one
+    // credential dramatically improves connection success across networks.
+    const urls = config.turn.url
+      .split(',')
+      .map((u) => u.trim())
+      .filter(Boolean);
     iceServers.push({
-      urls: config.turn.url,
+      urls: urls.length === 1 ? urls[0]! : urls,
       username: config.turn.username,
       credential: config.turn.credential,
     });
