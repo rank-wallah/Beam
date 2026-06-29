@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -16,15 +17,27 @@ export function AboutDev() {
     .slice(0, 2)
     .toUpperCase();
 
+  // Show the avatar image when present; fall back to initials if it's missing.
+  const [showAvatar, setShowAvatar] = useState(Boolean(DEV_INFO.avatarUrl));
+
   return (
     <section id="about" className="scroll-mt-24 border-t border-white/[0.06] py-24">
       <Reveal>
         <p className="eyebrow text-[var(--color-ink-faint)]">About</p>
         <Card className="mt-8">
           <CardContent className="grid gap-8 p-7 sm:p-9 md:grid-cols-[auto_1fr] md:items-start">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] font-display text-2xl text-[var(--color-ink)]">
-              {initials}
-            </span>
+            {showAvatar && DEV_INFO.avatarUrl ? (
+              <img
+                src={DEV_INFO.avatarUrl}
+                alt={DEV_INFO.name}
+                onError={() => setShowAvatar(false)}
+                className="h-16 w-16 rounded-full border border-white/12 object-cover"
+              />
+            ) : (
+              <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] font-display text-2xl text-[var(--color-ink)]">
+                {initials}
+              </span>
+            )}
 
             <div className="space-y-5">
               <div className="space-y-1">
