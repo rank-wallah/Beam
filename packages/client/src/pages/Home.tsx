@@ -60,7 +60,7 @@ export function HomePage() {
             transition={{ duration: 0.7, ease }}
             className="flex justify-center"
           >
-            <span className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/60 px-4 py-1.5 text-xs font-medium tracking-wide text-[var(--color-ink-soft)] shadow-sm backdrop-blur-md">
+            <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-white via-white to-blue-100/80 px-3.5 py-1.5 text-xs font-medium tracking-wide text-[var(--color-ink-soft)] shadow-sm ring-1 ring-black/10">
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-signal)]" />
               End-to-end encrypted · peer-to-peer
             </span>
@@ -70,9 +70,9 @@ export function HomePage() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease, delay: 0.12 }}
-            className="mt-7 text-[3rem] leading-[1.0] tracking-[-0.025em] sm:text-[5.25rem] lg:text-[6.75rem] lg:leading-[0.95]"
+            className="mt-7 text-[3rem] font-bold leading-[1.0] tracking-[-0.03em] sm:text-[5.25rem] lg:text-[6.75rem] lg:leading-[0.95]"
           >
-            Send files, <span className="script text-[var(--color-signal-deep)]">privately.</span>
+            Send files, <span className="script font-normal text-[var(--color-signal-deep)]">privately.</span>
           </motion.h1>
 
           <motion.p
