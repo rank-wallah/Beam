@@ -10,16 +10,20 @@ export interface DevInfo {
   name: string;
   tagline: string;
   blurb: string;
+  /** Optional avatar image (served from /public). Falls back to initials. */
+  avatarUrl?: string;
   /** The portfolio URL we want to drive clicks/backlinks to. */
   portfolioUrl: string;
   socials: { label: string; url: string }[];
 }
 
 export const DEV_INFO: DevInfo = {
-  name: 'Your Name',
+  name: 'Deepansh Sinha',
   tagline: 'Independent developer — I build fast, privacy-first web tools.',
   blurb:
-    "Hi, I'm the developer behind Zipline — a clean take on sending files directly between devices, without handing them to anyone's cloud. Everything is encrypted in your browser and streamed peer-to-peer. If it saved you an upload — or you just like the idea — a tip keeps independent projects like this going.",
+    "Hi, I'm Deepansh — Zipline is my take on sending files directly between devices, without handing them to anyone's cloud. Everything is encrypted in your browser and streamed peer-to-peer. If it saved you an upload — or you just like the idea — a tip keeps independent projects like this going.",
+  // Drop your photo at packages/client/public/profile.jpg to show it here.
+  avatarUrl: '/profile.jpg',
   // TODO: replace with your own portfolio / homepage URL.
   portfolioUrl: 'https://example.com',
   // TODO: replace with your own social links.
