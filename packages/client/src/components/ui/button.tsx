@@ -13,7 +13,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          'bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-sm shadow-blue-600/25 hover:from-blue-600 hover:to-blue-800',
+          'bg-[var(--color-signal)] text-white shadow-sm shadow-[var(--color-signal)]/25 hover:bg-[var(--color-signal-deep)]',
         secondary:
           'border border-white/60 bg-white/60 text-[var(--color-ink)] shadow-sm backdrop-blur-md hover:bg-white/80',
         ghost:
