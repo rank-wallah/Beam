@@ -102,7 +102,7 @@ export function PageShell({ children, narrow = false }: { children: ReactNode; n
 
           {/* Giant faded wordmark watermark */}
           <div aria-hidden className="pointer-events-none mt-4 select-none">
-            <span className="block bg-gradient-to-b from-black/[0.08] to-black/[0.01] bg-clip-text text-center font-display text-[23vw] font-bold leading-[0.78] text-transparent">
+            <span className="block whitespace-nowrap bg-gradient-to-b from-black/[0.08] to-black/[0.01] bg-clip-text text-center font-display text-[clamp(2.5rem,13vw,12rem)] font-bold leading-[0.85] text-transparent">
               Zipline.
             </span>
           </div>
