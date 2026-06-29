@@ -72,7 +72,7 @@ export function HomePage() {
             transition={{ duration: 1, ease, delay: 0.12 }}
             className="mt-7 text-[3rem] leading-[1.0] tracking-[-0.025em] sm:text-[5.25rem] lg:text-[6.75rem] lg:leading-[0.95]"
           >
-            Send files, <span className="script text-[var(--color-signal)]">privately.</span>
+            Send files, <span className="script text-[var(--color-signal-deep)]">privately.</span>
           </motion.h1>
 
           <motion.p
