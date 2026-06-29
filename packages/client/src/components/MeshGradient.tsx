@@ -13,7 +13,7 @@ export function MeshGradient({ className = '' }: { className?: string }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
+    const io = new IntersectionObserver((entries) => setVisible(entries[0]?.isIntersecting ?? false), {
       rootMargin: '120px',
     });
     io.observe(el);
