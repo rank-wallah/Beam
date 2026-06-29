@@ -2,14 +2,15 @@
 
 /*
  * ─────────────────────────────────────────────────────────────────────────
- * ZIPLINE — quiet, editorial, premium. Linear/Vercel restraint. Near-black
- * canvas, off-white ink, with a single iris/periwinkle accent carrying the
- * primary actions. Glass surfaces, generous negative space, hairline rules.
- * Display: Fraunces. Text/UI: Manrope.
+ * ZIPLINE — quiet, editorial, premium. Linear/Vercel restraint. Monochrome
+ * luxury: near-black canvas, off-white ink, silver/white accent (no blue, no
+ * orange). Color is carried by the Three.js hero centerpiece, not the UI.
+ * Glass surfaces, generous negative space, hairline rules.
+ * Display: Libre Caslon Text. Text/UI: Manrope.
  * ─────────────────────────────────────────────────────────────────────────
  */
 @theme {
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-display: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
   --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
 
@@ -23,13 +24,12 @@
   --color-line: #1b1b1f;
   --color-line-strong: #2c2c33;
 
-  /* Iris / periwinkle — the primary action + accent color. */
-  --color-signal: #8487ff;
-  --color-signal-deep: #6e70f5;
-  /* Single chromatic accent for secure/live cues. */
+  /* Monochrome base accent (white is the primary action color) */
+  --color-signal: #f4f4f6;
+  --color-signal-deep: #d6d6db;
+  /* Single chromatic accent — refined emerald, used only for secure/live cues */
   --color-mint: #54d6a6;
   --color-mint-deep: #2bbd8a;
-  /* Success stays green for clear, conventional "done/verified" semantics. */
   --color-positive: #54d6a6;
   --color-danger: #f0686a;
 
