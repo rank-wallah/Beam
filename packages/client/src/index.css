@@ -23,9 +23,9 @@
   --color-line: rgba(20, 24, 60, 0.10);
   --color-line-strong: rgba(20, 24, 60, 0.18);
 
-  /* Indigo — the primary action + accent color. */
-  --color-signal: #6366f1;
-  --color-signal-deep: #4f46e5;
+  /* Vivid blue — the primary action + accent color. */
+  --color-signal: #2f6bff;
+  --color-signal-deep: #1f54e0;
   /* Emerald — secure / live / verified cues. */
   --color-mint: #0fb98a;
   --color-mint-deep: #0a9b73;
@@ -67,12 +67,12 @@
 
   body {
     margin: 0;
-    /* Soft pastel gradient mesh — the glassy canvas. Fixed so it stays put. */
+    /* Clean light canvas with a big soft blue blob to the right. Fixed. */
     background:
-      radial-gradient(880px 620px at 8% -10%, rgba(99, 102, 241, 0.22), transparent 60%),
-      radial-gradient(820px 600px at 102% 4%, rgba(236, 72, 153, 0.14), transparent 56%),
-      radial-gradient(900px 720px at 50% 116%, rgba(56, 189, 248, 0.18), transparent 60%),
-      linear-gradient(180deg, #eef1fa 0%, #f6f7fc 60%, #eef1fa 100%);
+      radial-gradient(760px 680px at 112% 26%, rgba(47, 107, 255, 0.42), transparent 58%),
+      radial-gradient(560px 520px at 96% 8%, rgba(47, 107, 255, 0.22), transparent 60%),
+      radial-gradient(680px 560px at -8% 6%, rgba(120, 160, 255, 0.12), transparent 60%),
+      linear-gradient(180deg, #fbfcfe 0%, #f4f7fd 100%);
     background-attachment: fixed;
     color: var(--color-ink);
     font-family: var(--font-sans);
@@ -103,9 +103,9 @@
     height: 60vh;
     z-index: 0;
     pointer-events: none;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.16), rgba(236, 72, 153, 0.10));
-    clip-path: polygon(100% 0, 100% 64%, 38% 0);
-    opacity: 0.8;
+    background: linear-gradient(135deg, rgba(47, 107, 255, 0.20), rgba(120, 160, 255, 0.10));
+    clip-path: polygon(100% 0, 100% 58%, 44% 0);
+    opacity: 0.7;
   }
 
   #root {
@@ -200,6 +200,13 @@
 .serif-italic {
   font-family: var(--font-display);
   font-style: italic;
+}
+
+/* Handwritten script — for emphasis words in display headings. */
+.script {
+  font-family: 'Kaushan Script', var(--font-display), cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /* Quiet animated underline for links. */
