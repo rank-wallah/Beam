@@ -40,14 +40,14 @@ export function HomePage() {
   return (
     <PageShell>
       {/* ── Hero — quiet, centered editorial ─────────────────── */}
-      <section className="relative flex min-h-[88vh] items-center justify-center text-center">
+      <section className="relative flex min-h-[66vh] items-center justify-center text-center">
         {/* Full-viewport-width atmospheric backdrop — animated blue mesh blob,
             massed to the right like the reference. */}
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[130%] w-screen -translate-x-1/2 -translate-y-1/2 overflow-hidden"
         >
-          <div className="absolute -right-[8%] -top-[24%] h-[150%] w-[70%]">
+          <div className="absolute -right-[14%] -top-[40%] h-[190%] w-[95%]">
             <MeshGradient className="h-full w-full" />
           </div>
         </div>
@@ -161,9 +161,9 @@ export function HomePage() {
       <AboutDev />
 
       {/* ── Closing ──────────────────────────────────────────── */}
-      <section className="py-24">
+      <section className="py-14">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[28px] border border-black/[0.08] bg-black/[0.03] px-8 py-20 text-center">
+          <div className="relative overflow-hidden rounded-[28px] border border-black/[0.08] bg-black/[0.03] px-8 py-14 text-center">
             <div
               className="pointer-events-none absolute inset-x-0 top-0 h-48"
               style={{ background: 'radial-gradient(460px 180px at 50% 0, rgba(99,102,241,0.14), transparent 70%)' }}
@@ -191,7 +191,7 @@ export function HomePage() {
 /** A section — spacing only, no hard divider line. */
 function Section({ id, children }: { id: string; children: ReactNode }) {
   return (
-    <section id={id} className="scroll-mt-24 py-20 sm:py-28">
+    <section id={id} className="scroll-mt-24 py-14 sm:py-20">
       {children}
     </section>
   );
