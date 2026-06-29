@@ -28,7 +28,7 @@ export function PageShell({ children, narrow = false }: { children: ReactNode; n
             ))}
             <Link
               to="/send"
-              className="rounded-[10px] border border-black/10 bg-black/[0.03] px-4 py-2 text-sm font-medium text-[var(--color-ink)] transition-colors hover:bg-black/[0.05]"
+              className="rounded-[10px] bg-[var(--color-signal)] px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[var(--color-signal-deep)]"
             >
               Send a file
             </Link>

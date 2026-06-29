@@ -54,14 +54,17 @@ export function HomePage() {
 
         {/* Copy — centered editorial */}
         <div className="relative z-10 mx-auto max-w-3xl">
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease }}
-            className="eyebrow text-[var(--color-ink-faint)]"
+            className="flex justify-center"
           >
-            End-to-end encrypted · peer-to-peer
-          </motion.p>
+            <span className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/60 px-4 py-1.5 text-xs font-medium tracking-wide text-[var(--color-ink-soft)] shadow-sm backdrop-blur-md">
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-signal)]" />
+              End-to-end encrypted · peer-to-peer
+            </span>
+          </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 18 }}
@@ -69,7 +72,7 @@ export function HomePage() {
             transition={{ duration: 1, ease, delay: 0.12 }}
             className="mt-7 text-[3rem] leading-[1.0] tracking-[-0.025em] sm:text-[5.25rem] lg:text-[6.75rem] lg:leading-[0.95]"
           >
-            Send files, <span className="serif-italic">privately.</span>
+            Send files, <span className="script text-[var(--color-signal)]">privately.</span>
           </motion.h1>
 
           <motion.p
