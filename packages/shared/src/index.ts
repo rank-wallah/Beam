@@ -1,5 +1,5 @@
 /**
- * @beam/shared — public barrel.
+ * @zipline/shared — public barrel.
  *
  * The single source of truth for wire contracts shared by the client and the
  * signaling server. Importing from here (rather than reaching into individual

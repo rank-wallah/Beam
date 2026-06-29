@@ -5,7 +5,7 @@
  * know which output file and byte offset each incoming chunk belongs to. Both
  * sides must agree exactly, so the layout rule lives here, once.
  */
-import { CHUNK_SIZE, type FileDescriptor } from '@beam/shared';
+import { CHUNK_SIZE, type FileDescriptor } from '@zipline/shared';
 
 export interface ChunkTarget {
   fileIndex: number;

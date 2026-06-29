@@ -1,8 +1,8 @@
-# Beam
+# Zipline
 
 **Send files directly between devices — without uploading them to the cloud.**
 
-Beam is an end-to-end encrypted, peer-to-peer file transfer web app. Files are
+Zipline is an end-to-end encrypted, peer-to-peer file transfer web app. Files are
 encrypted in the sender's browser, streamed directly to the receiver over a
 WebRTC DataChannel, and decrypted in the receiver's browser. The backend only
 brokers the initial handshake (signaling); it never sees file contents or
@@ -13,7 +13,7 @@ Sender browser ──encrypt──▶ ░░ WebRTC P2P DataChannel ░░ ─�
                                      ▲
                           signaling only (SDP/ICE)
                                      │
-                            Beam signaling server  ── Redis (ephemeral rooms)
+                            Zipline signaling server  ── Redis (ephemeral rooms)
                           (no files, no keys, ever)
 ```
 
@@ -22,7 +22,7 @@ Sender browser ──encrypt──▶ ░░ WebRTC P2P DataChannel ░░ ─�
 - **Files are encrypted client-side** with AES-256-GCM before they ever leave
   the sender. The backend cannot read them.
 - **The encryption key never reaches the backend.** It lives in the share
-  link's URL *fragment* (`https://beam.app/r/abc123#secretKey`). Browsers never
+  link's URL *fragment* (`https://zipline.app/r/abc123#secretKey`). Browsers never
   send the fragment to the server, so the server only ever sees `abc123`.
 - **Integrity is verified** per-chunk (SHA-256) and across the whole transfer
   (a SHA-256 Merkle tree), detecting corruption, missing chunks, and tampering.
@@ -32,11 +32,11 @@ Sender browser ──encrypt──▶ ░░ WebRTC P2P DataChannel ░░ ─�
 ## Monorepo layout
 
 ```
-beam/
+zipline/
 ├── packages/
-│   ├── shared/   @beam/shared  — wire contracts (signaling + datachannel protocol) + constants
-│   ├── server/   @beam/server  — Fastify + WebSocket signaling, Redis rooms (no file storage)
-│   └── client/   @beam/client  — React + Vite + Tailwind + shadcn/ui + Framer Motion
+│   ├── shared/   @zipline/shared  — wire contracts (signaling + datachannel protocol) + constants
+│   ├── server/   @zipline/server  — Fastify + WebSocket signaling, Redis rooms (no file storage)
+│   └── client/   @zipline/client  — React + Vite + Tailwind + shadcn/ui + Framer Motion
 ```
 
 The client is split into independent layers, each ignorant of the others'

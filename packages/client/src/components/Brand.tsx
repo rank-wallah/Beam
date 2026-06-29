@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 /**
- * Beam wordmark — a quiet four-point spark + a Libre Caslon logotype.
+ * Zipline wordmark — a quiet four-point spark + a Libre Caslon logotype.
  * Restrained and editorial; no boxes, no gradients.
  */
 export function Brand({ className = '' }: { className?: string }) {
@@ -14,7 +14,7 @@ export function Brand({ className = '' }: { className?: string }) {
         />
       </svg>
       <span className="font-display text-[1.4rem] leading-none tracking-tight text-[var(--color-ink)]">
-        Beam
+        Zipline
       </span>
     </Link>
   );

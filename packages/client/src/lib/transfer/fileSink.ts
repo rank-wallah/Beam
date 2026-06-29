@@ -10,7 +10,7 @@
  * (the required gesture for the save dialog). `getBytes()` exists mainly for
  * tests / integrity checks.
  */
-import type { ManifestMessage } from '@beam/shared';
+import type { ManifestMessage } from '@zipline/shared';
 import type { ResumeStore } from './resumeStore.js';
 import type { CompletedFile } from './types.js';
 

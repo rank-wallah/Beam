@@ -11,7 +11,7 @@
  * Either way the browser just receives a final iceServers list; no client
  * change is needed to switch relays.
  */
-import type { IceConfigResponse, IceServerConfig } from '@beam/shared';
+import type { IceConfigResponse, IceServerConfig } from '@zipline/shared';
 import { config } from '../config.js';
 
 /** Cache the fetched API servers so we don't hit the provider on every /ice. */

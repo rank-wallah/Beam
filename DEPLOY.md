@@ -1,12 +1,12 @@
-# Deploying Beam to a Google Cloud VM
+# Deploying Zipline to a Google Cloud VM
 
-This walks through hosting Beam on a single Google Compute Engine VM, served at
-**https://beam.kroszborg.co** with HTTPS.
+This walks through hosting Zipline on a single Google Compute Engine VM, served at
+**https://zipline.vercel.app** with HTTPS.
 
 ## Architecture on the box
 
 ```
-                         beam.kroszborg.co (DNS A → VM external IP)
+                         zipline.vercel.app (DNS A → VM external IP)
                                    │  :443 / :80
                               ┌────▼─────┐
    browser  ───────────────▶ │  nginx   │
@@ -14,7 +14,7 @@ This walks through hosting Beam on a single Google Compute Engine VM, served at
             static client (dist)  │   /ws /ice /health  (reverse proxy)
             served from disk      ▼
                           ┌───────────────┐     ┌─────────┐
-                          │ beam-server   │────▶│  redis  │
+                          │ zipline-server   │────▶│  redis  │
                           │ (node, :8787) │     │ (local) │
                           └───────────────┘     └─────────┘
 ```
@@ -42,7 +42,7 @@ is plenty. Most cost comes from the VM being always-on.
 ### Create it (gcloud)
 
 ```bash
-gcloud compute instances create beam \
+gcloud compute instances create zipline \
   --machine-type=e2-small \
   --image-family=ubuntu-2404-lts-amd64 --image-project=ubuntu-os-cloud \
   --boot-disk-size=20GB \
@@ -60,20 +60,20 @@ Note the VM's **external IP** from `gcloud compute instances list`.
 
 ## 2. DNS
 
-At your domain registrar / DNS for `kroszborg.co`, add an **A record**:
+At your domain registrar / DNS for `example.com`, add an **A record**:
 
 ```
-Type: A    Name: beam    Value: <VM external IP>    TTL: 300
+Type: A    Name: zipline    Value: <VM external IP>    TTL: 300
 ```
 
-Wait for it to resolve: `dig +short beam.kroszborg.co` should return the IP.
+Wait for it to resolve: `dig +short zipline.vercel.app` should return the IP.
 
 ---
 
 ## 3. Server setup (SSH into the VM)
 
 ```bash
-gcloud compute ssh beam --zone=us-central1-a
+gcloud compute ssh zipline --zone=us-central1-a
 ```
 
 Install Node 22+, pnpm, Redis, nginx, certbot:
@@ -107,9 +107,9 @@ node -v                                   # v22.x
 ## 4. Get the code & build
 
 ```bash
-sudo mkdir -p /opt/beam && sudo chown $USER /opt/beam
-git clone https://github.com/Kroszborg/beam /opt/beam
-cd /opt/beam
+sudo mkdir -p /opt/zipline && sudo chown $USER /opt/zipline
+git clone https://github.com/your-username/zipline /opt/zipline
+cd /opt/zipline
 pnpm install --frozen-lockfile
 
 # pnpm 11 blocks unapproved build scripts (esbuild) and errors when running a
@@ -120,21 +120,21 @@ pnpm install --frozen-lockfile
 
 # Build the client pointing at the public origin (same host).
 # The client turns https:// into wss:// and calls /ws + /ice automatically.
-VITE_SIGNALING_URL=https://beam.kroszborg.co pnpm --filter @beam/client build
+VITE_SIGNALING_URL=https://zipline.vercel.app pnpm --filter @zipline/client build
 
 # Publish the static build
-sudo mkdir -p /var/www/beam
-sudo cp -r packages/client/dist/* /var/www/beam/
+sudo mkdir -p /var/www/zipline
+sudo cp -r packages/client/dist/* /var/www/zipline/
 ```
 
-Create the server env file `/opt/beam/.env`:
+Create the server env file `/opt/zipline/.env`:
 
 ```ini
 PORT=8787
 HOST=127.0.0.1
 REDIS_URL=redis://localhost:6379
 ROOM_TTL_SECONDS=3600
-CORS_ORIGINS=https://beam.kroszborg.co
+CORS_ORIGINS=https://zipline.vercel.app
 STUN_URLS=stun:stun.l.google.com:19302,stun:stun1.l.google.com:19302
 # Optional TURN (see §8) — leave blank for STUN-only:
 TURN_URL=
@@ -147,18 +147,18 @@ NODE_ENV=production
 
 ## 5. Run the signaling server as a service
 
-Create `/etc/systemd/system/beam-server.service`:
+Create `/etc/systemd/system/zipline-server.service`:
 
 ```ini
 [Unit]
-Description=Beam signaling server
+Description=Zipline signaling server
 After=network.target redis-server.service
 
 [Service]
-WorkingDirectory=/opt/beam
-EnvironmentFile=/opt/beam/.env
-# Path to tsx — confirm with: find /opt/beam -path '*/node_modules/.bin/tsx'
-ExecStart=/opt/beam/packages/server/node_modules/.bin/tsx /opt/beam/packages/server/src/index.ts
+WorkingDirectory=/opt/zipline
+EnvironmentFile=/opt/zipline/.env
+# Path to tsx — confirm with: find /opt/zipline -path '*/node_modules/.bin/tsx'
+ExecStart=/opt/zipline/packages/server/node_modules/.bin/tsx /opt/zipline/packages/server/src/index.ts
 Restart=always
 RestartSec=3
 User=www-data
@@ -169,12 +169,12 @@ WantedBy=multi-user.target
 ```
 
 > No `chown` needed: pnpm installs world-readable files, so `www-data` can run
-> the server while you keep ownership of `/opt/beam` for `git pull`.
+> the server while you keep ownership of `/opt/zipline` for `git pull`.
 
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable --now beam-server
-sudo systemctl status beam-server          # should be "active (running)"
+sudo systemctl enable --now zipline-server
+sudo systemctl status zipline-server          # should be "active (running)"
 curl -s localhost:8787/health              # {"status":"ok",...}
 ```
 
@@ -182,14 +182,14 @@ curl -s localhost:8787/health              # {"status":"ok",...}
 
 ## 6. nginx (static client + proxy + WebSocket upgrade)
 
-Create `/etc/nginx/sites-available/beam`:
+Create `/etc/nginx/sites-available/zipline`:
 
 ```nginx
 server {
     listen 80;
-    server_name beam.kroszborg.co;
+    server_name zipline.vercel.app;
 
-    root /var/www/beam;
+    root /var/www/zipline;
     index index.html;
 
     # SPA: fall back to index.html for client-side routes (/send, /r/:id, ...)
@@ -215,23 +215,23 @@ server {
 ```
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/beam /etc/nginx/sites-enabled/beam
+sudo ln -s /etc/nginx/sites-available/zipline /etc/nginx/sites-enabled/zipline
 sudo rm -f /etc/nginx/sites-enabled/default
 sudo nginx -t && sudo systemctl reload nginx
 ```
 
-Beam should now load over **http://beam.kroszborg.co**.
+Zipline should now load over **http://zipline.vercel.app**.
 
 ---
 
 ## 7. HTTPS (Let's Encrypt)
 
 ```bash
-sudo certbot --nginx -d beam.kroszborg.co --redirect -m you@example.com --agree-tos -n
+sudo certbot --nginx -d zipline.vercel.app --redirect -m you@example.com --agree-tos -n
 ```
 
 certbot edits the nginx config to add `:443` + auto-redirect and sets up renewal.
-Visit **https://beam.kroszborg.co** — done. WebRTC + clipboard require HTTPS, so
+Visit **https://zipline.vercel.app** — done. WebRTC + clipboard require HTTPS, so
 this step is mandatory for production.
 
 ### Security headers (recommended)
@@ -256,27 +256,27 @@ add_header Permissions-Policy "camera=(), microphone=(), geolocation=()" always;
 
 STUN-only fails for some symmetric-NAT / CGNAT pairs. To make those work, run a
 TURN server (e.g. `coturn`) or use a hosted one (Metered, Twilio), then fill
-`TURN_URL`, `TURN_USERNAME`, `TURN_CREDENTIAL` in `/opt/beam/.env` and
-`sudo systemctl restart beam-server`. No client change needed — it reads `/ice`.
+`TURN_URL`, `TURN_USERNAME`, `TURN_CREDENTIAL` in `/opt/zipline/.env` and
+`sudo systemctl restart zipline-server`. No client change needed — it reads `/ice`.
 
 ---
 
 ## 9. Redeploying after changes
 
 ```bash
-cd /opt/beam && git pull
+cd /opt/zipline && git pull
 pnpm install --frozen-lockfile
-VITE_SIGNALING_URL=https://beam.kroszborg.co pnpm --filter @beam/client build
-sudo cp -r packages/client/dist/* /var/www/beam/
-sudo systemctl restart beam-server
+VITE_SIGNALING_URL=https://zipline.vercel.app pnpm --filter @zipline/client build
+sudo cp -r packages/client/dist/* /var/www/zipline/
+sudo systemctl restart zipline-server
 ```
 
 ## 10. Quick checks
 
 ```bash
-curl -s https://beam.kroszborg.co/health      # {"status":"ok"}
-curl -s https://beam.kroszborg.co/ice          # STUN/TURN JSON
-sudo journalctl -u beam-server -f              # live server logs
+curl -s https://zipline.vercel.app/health      # {"status":"ok"}
+curl -s https://zipline.vercel.app/ice          # STUN/TURN JSON
+sudo journalctl -u zipline-server -f              # live server logs
 ```
 
 Open `/send` in one browser and the generated link in another to confirm a real

@@ -17,7 +17,7 @@
  * authenticates: any tampering or corruption makes `crypto.subtle.decrypt`
  * throw, which the receiver treats as a verification failure.
  */
-import { IV_LENGTH, BASE_NONCE_LENGTH, GCM_TAG_BITS } from '@beam/shared';
+import { IV_LENGTH, BASE_NONCE_LENGTH, GCM_TAG_BITS } from '@zipline/shared';
 import { asBufferSource } from './encoding.js';
 
 const ALGORITHM = 'AES-GCM';

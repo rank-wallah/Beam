@@ -1,9 +1,9 @@
 {
-  "name": "@beam/client",
+  "name": "@zipline/client",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Beam web client — React + Vite + Tailwind + shadcn-style UI. Owns all encryption, WebRTC transport, and the transfer protocol.",
+  "description": "Zipline web client — React + Vite + Tailwind + shadcn-style UI. Owns all encryption, WebRTC transport, and the transfer protocol.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -13,7 +13,7 @@
     "lint": "eslint . --max-warnings 0 || true"
   },
   "dependencies": {
-    "@beam/shared": "workspace:*",
+    "@zipline/shared": "workspace:*",
     "@radix-ui/react-slot": "^1.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

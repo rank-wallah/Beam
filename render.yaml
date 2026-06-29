@@ -1,0 +1,38 @@
+# Render Blueprint — signaling server + Redis (Key Value).
+# The static client is NOT here; it is deployed separately on Vercel.
+#
+# Deploy: Render Dashboard → New → Blueprint → pick this repo.
+# After the first deploy, set CORS_ORIGINS to your real Vercel URL.
+services:
+  - type: web
+    name: zipline-server
+    runtime: node
+    plan: free
+    # corepack provides pnpm; Node 22+ is required (set via NODE_VERSION below).
+    buildCommand: corepack enable && pnpm install --frozen-lockfile
+    startCommand: pnpm --filter @zipline/server start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: ROOM_TTL_SECONDS
+        value: "3600"
+      - key: STUN_URLS
+        value: stun:stun.l.google.com:19302,stun:stun1.l.google.com:19302
+      # ⚠️ Update this to your Vercel URL after the frontend is deployed.
+      - key: CORS_ORIGINS
+        value: https://your-app.vercel.app
+      # Pulled automatically from the Redis service below.
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: zipline-redis
+          property: connectionString
+
+  - type: redis
+    name: zipline-redis
+    plan: free
+    # Rooms are ephemeral; no persistence needed.
+    ipAllowList: [] # internal-only (reachable by the server, not the public)

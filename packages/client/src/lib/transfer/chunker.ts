@@ -9,7 +9,7 @@
  * Crucially, the file is **never** fully read into memory: each chunk is read
  * on demand via `Blob.slice().arrayBuffer()`, so peak memory is ~one chunk.
  */
-import { CHUNK_SIZE, type FileDescriptor } from '@beam/shared';
+import { CHUNK_SIZE, type FileDescriptor } from '@zipline/shared';
 
 interface ChunkLocation {
   fileIndex: number;

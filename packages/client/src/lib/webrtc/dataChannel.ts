@@ -12,7 +12,7 @@
  * The wrapper is transport-only — it has no notion of chunks, encryption, or
  * files. The transfer layer composes those concepts on top.
  */
-import { BUFFERED_AMOUNT_LOW_THRESHOLD } from '@beam/shared';
+import { BUFFERED_AMOUNT_LOW_THRESHOLD } from '@zipline/shared';
 import type { Transport, ChannelData } from './transport.js';
 
 export type ChannelMessage = ChannelData;

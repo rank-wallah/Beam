@@ -16,7 +16,7 @@
  * device, and is cleared once the user has saved the files.
  */
 
-const DB_NAME = 'beam';
+const DB_NAME = 'zipline';
 const DB_VERSION = 1;
 const CHUNK_STORE = 'chunks';
 const MANIFEST_STORE = 'manifests';

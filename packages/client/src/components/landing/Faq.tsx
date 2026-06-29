@@ -6,11 +6,11 @@ import { cn } from '@/lib/utils';
 const FAQS = [
   {
     q: 'Are my files really never uploaded?',
-    a: 'Correct. Files are encrypted in your browser and sent directly to the receiver over a peer-to-peer WebRTC connection. Beam’s server only helps the two devices find each other (signaling) — it never receives file data.',
+    a: 'Correct. Files are encrypted in your browser and sent directly to the receiver over a peer-to-peer WebRTC connection. Zipline’s server only helps the two devices find each other (signaling) — it never receives file data.',
   },
   {
-    q: 'What stops Beam from reading my files?',
-    a: 'The AES-256 key is generated on your device and travels only in the share link’s URL fragment (after the #). Browsers never send the fragment to any server, so Beam literally never sees the key or the plaintext.',
+    q: 'What stops Zipline from reading my files?',
+    a: 'The AES-256 key is generated on your device and travels only in the share link’s URL fragment (after the #). Browsers never send the fragment to any server, so Zipline literally never sees the key or the plaintext.',
   },
   {
     q: 'What happens if the connection drops mid-transfer?',

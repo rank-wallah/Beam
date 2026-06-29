@@ -5,7 +5,7 @@ import { Reveal } from '@/components/Reveal';
 import { DEV_INFO } from '@/config/dev';
 
 /**
- * About-the-dev — establishes that Beam is a real person's project and links
+ * About-the-dev — establishes that Zipline is a real person's project and links
  * out to the portfolio (the primary conversion goal of this section).
  */
 export function AboutDev() {

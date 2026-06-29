@@ -18,7 +18,7 @@
  * just replays manifest → serve-requests until the receiver reports complete.
  */
 import { nanoid } from './ids.js';
-import { CHUNK_SIZE, type ManifestMessage, type ControlMessage } from '@beam/shared';
+import { CHUNK_SIZE, type ManifestMessage, type ControlMessage } from '@zipline/shared';
 import { encryptChunk, sha256, bytesToBase64Url } from '../crypto/index.js';
 import type { Transport } from '../webrtc/transport.js';
 import { FileChunker } from './chunker.js';

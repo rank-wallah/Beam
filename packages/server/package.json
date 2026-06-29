@@ -1,9 +1,9 @@
 {
-  "name": "@beam/server",
+  "name": "@zipline/server",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Beam signaling server — Fastify + WebSocket, Redis-backed ephemeral rooms. Never stores files or keys.",
+  "description": "Zipline signaling server — Fastify + WebSocket, Redis-backed ephemeral rooms. Never stores files or keys.",
   "main": "./src/index.ts",
   "scripts": {
     "dev": "tsx watch src/index.ts",
@@ -13,7 +13,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@beam/shared": "workspace:*",
+    "@zipline/shared": "workspace:*",
     "@fastify/cors": "^10.0.1",
     "@fastify/websocket": "^11.0.1",
     "fastify": "^5.2.0",

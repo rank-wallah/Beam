@@ -5,29 +5,29 @@ export function TermsPage() {
   return (
     <LegalLayout title="Terms of Service" updated="June 2026">
       <p className="text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
-        By using Beam you agree to these terms. Beam is a free tool for transferring files directly
+        By using Zipline you agree to these terms. Zipline is a free tool for transferring files directly
         between devices. Please use it responsibly.
       </p>
 
       <LegalSection title="The service">
         <p>
-          Beam helps two devices establish a direct, end-to-end encrypted connection to transfer
+          Zipline helps two devices establish a direct, end-to-end encrypted connection to transfer
           files. Both the sender and receiver must be online with the share link for a transfer to
-          occur. Beam does not store your files and cannot recover or resend them.
+          occur. Zipline does not store your files and cannot recover or resend them.
         </p>
       </LegalSection>
 
       <LegalSection title="Acceptable use">
         <p>
           You are solely responsible for the files you transfer and for ensuring you have the right
-          to share them. Do not use Beam to transfer unlawful material or to infringe anyone's
+          to share them. Do not use Zipline to transfer unlawful material or to infringe anyone's
           rights. Do not attempt to disrupt, overload, or abuse the signaling service.
         </p>
       </LegalSection>
 
       <LegalSection title="No warranty">
         <p>
-          Beam is provided “as is”, without warranties of any kind. Peer-to-peer connections depend
+          Zipline is provided “as is”, without warranties of any kind. Peer-to-peer connections depend
           on both networks and may not always succeed. We do not guarantee availability, delivery,
           speed, or uninterrupted operation.
         </p>
@@ -36,7 +36,7 @@ export function TermsPage() {
       <LegalSection title="Limitation of liability">
         <p>
           To the maximum extent permitted by law, the developer is not liable for any loss or damage
-          arising from your use of Beam, including failed transfers, lost data, or interrupted
+          arising from your use of Zipline, including failed transfers, lost data, or interrupted
           connections.
         </p>
       </LegalSection>

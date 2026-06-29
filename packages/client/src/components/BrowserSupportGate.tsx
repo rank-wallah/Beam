@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { AlertTriangle } from 'lucide-react';
 
 /**
- * Beam needs WebRTC DataChannels and the Web Crypto API. If either is missing
+ * Zipline needs WebRTC DataChannels and the Web Crypto API. If either is missing
  * (very old or locked-down browsers), we show a clear message instead of
  * failing deep inside a transfer.
  */
@@ -25,7 +25,7 @@ export function BrowserSupportGate({ children }: { children: ReactNode }) {
         <AlertTriangle className="mx-auto h-8 w-8 text-[var(--color-danger)]" />
         <h1 className="text-lg font-semibold">Browser not supported</h1>
         <p className="text-sm text-[var(--color-ink-muted)]">
-          Beam needs a modern browser with WebRTC and the Web Crypto API. Please try the latest
+          Zipline needs a modern browser with WebRTC and the Web Crypto API. Please try the latest
           Chrome, Edge, Firefox, or Safari.
         </p>
       </div>

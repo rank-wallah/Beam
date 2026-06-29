@@ -4,12 +4,12 @@
  *
  * A single 4 MB encrypted chunk is too large for one SCTP message, so it is
  * sent as a sequence of 16 KB frames. Each frame carries a fixed 16-byte
- * binary header (see FRAME_HEADER in @beam/shared) identifying which chunk and
+ * binary header (see FRAME_HEADER in @zipline/shared) identifying which chunk and
  * which frame it is, plus how many frames the chunk has. The receiver buffers
  * frames per chunk until all are present, then hands the reassembled
  * ciphertext to the verify/decrypt step.
  */
-import { WIRE_FRAME_SIZE, FRAME_HEADER, type FrameHeader } from '@beam/shared';
+import { WIRE_FRAME_SIZE, FRAME_HEADER, type FrameHeader } from '@zipline/shared';
 
 /** Split one chunk's ciphertext into framed ArrayBuffers ready to send. */
 export function frameChunk(chunkIndex: number, ciphertext: Uint8Array): ArrayBuffer[] {
