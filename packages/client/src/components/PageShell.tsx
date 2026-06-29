@@ -28,7 +28,7 @@ export function PageShell({ children, narrow = false }: { children: ReactNode; n
         initial={{ opacity: 0, y: -18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
-        className="sticky top-0 z-30 border-b border-black/[0.08] bg-[var(--color-paper)]/70 backdrop-blur-xl"
+        className="sticky top-0 z-30 border-b border-black/[0.04] bg-white/35 backdrop-blur-md"
       >
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
           <Brand />
