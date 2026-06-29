@@ -1,6 +1,7 @@
 import { type ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Github, Globe, Twitter } from 'lucide-react';
 import { Brand } from './Brand';
 import { DEV_INFO } from '@/config/dev';
 
@@ -51,21 +52,64 @@ export function PageShell({ children, narrow = false }: { children: ReactNode; n
         </div>
       </motion.header>
 
-      <main className="mx-auto w-full flex-1 px-6 py-14 sm:py-20">
+      <main className="mx-auto w-full flex-1 px-6 py-7 sm:py-10">
         <div className={narrow ? 'mx-auto max-w-2xl' : 'mx-auto max-w-6xl'}>{children}</div>
       </main>
 
-      <footer className="border-t border-black/[0.08]">
-        <div className="mx-auto w-full max-w-6xl px-6 py-10">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            <Brand />
-            <p className="max-w-xs text-sm leading-relaxed text-[var(--color-ink-faint)]">
-              Encrypted, peer-to-peer file transfer. No uploads. No accounts.
-            </p>
+      <footer className="relative overflow-hidden border-t border-black/[0.08]">
+        <div className="mx-auto w-full max-w-6xl px-6 pt-12">
+          {/* Top row: brand + tagline · follow */}
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
+            <div className="space-y-3">
+              <Brand />
+              <p className="max-w-xs text-sm leading-relaxed text-[var(--color-ink-faint)]">
+                Encrypted, peer-to-peer file transfer. No uploads. No accounts.
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 sm:items-end">
+              <span className="text-sm text-[var(--color-ink-faint)]">Follow on</span>
+              <div className="flex items-center gap-4 text-[var(--color-ink-soft)]">
+                <a
+                  href="https://github.com"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="GitHub"
+                  className="transition-colors hover:text-[var(--color-ink)]"
+                >
+                  <Github className="h-5 w-5" strokeWidth={1.6} />
+                </a>
+                <a
+                  href={DEV_INFO.portfolioUrl}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Website"
+                  className="transition-colors hover:text-[var(--color-ink)]"
+                >
+                  <Globe className="h-5 w-5" strokeWidth={1.6} />
+                </a>
+                <a
+                  href={DEV_INFO.socials[0]?.url ?? 'https://x.com'}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="X"
+                  className="transition-colors hover:text-[var(--color-ink)]"
+                >
+                  <Twitter className="h-5 w-5" strokeWidth={1.6} />
+                </a>
+              </div>
+            </div>
           </div>
-          <hr className="rule my-7" />
-          <div className="flex flex-col gap-4 text-sm text-[var(--color-ink-faint)] sm:flex-row sm:items-center sm:justify-between">
-            <span>© {new Date().getFullYear()} Zipline</span>
+
+          {/* Giant faded wordmark watermark */}
+          <div aria-hidden className="pointer-events-none mt-4 select-none">
+            <span className="block bg-gradient-to-b from-black/[0.08] to-black/[0.01] bg-clip-text text-center font-display text-[23vw] font-bold leading-[0.78] text-transparent">
+              Zipline.
+            </span>
+          </div>
+
+          {/* Bottom row */}
+          <div className="flex flex-col gap-3 border-t border-black/[0.08] py-6 text-sm text-[var(--color-ink-faint)] sm:flex-row sm:items-center sm:justify-between">
+            <span>© {new Date().getFullYear()} Zipline. All rights reserved.</span>
             <nav className="flex items-center gap-6">
               <Link to="/privacy" className="link-ul hover:text-[var(--color-ink)]">
                 Privacy
