@@ -13,6 +13,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { PageShell } from '@/components/PageShell';
+import { MeshGradient } from '@/components/MeshGradient';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Reveal } from '@/components/Reveal';
@@ -40,16 +41,15 @@ export function HomePage() {
     <PageShell>
       {/* ── Hero — quiet, centered editorial ─────────────────── */}
       <section className="relative flex min-h-[88vh] items-center justify-center text-center">
-        {/* Full-viewport-width atmospheric backdrop */}
+        {/* Full-viewport-width atmospheric backdrop — animated blue mesh blob,
+            massed to the right like the reference. */}
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[130%] w-screen -translate-x-1/2 -translate-y-1/2 overflow-hidden"
         >
-          <div
-            className="animate-float-slow absolute left-1/2 top-[46%] h-[58rem] w-[58rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[150px]"
-            style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.16), transparent 60%)' }}
-          />
-          <div className="dotgrid absolute inset-0 opacity-[0.08] [mask-image:radial-gradient(ellipse_55%_55%_at_50%_46%,#000,transparent_82%)]" />
+          <div className="absolute -right-[8%] -top-[24%] h-[150%] w-[70%]">
+            <MeshGradient className="h-full w-full" />
+          </div>
         </div>
 
         {/* Copy — centered editorial */}

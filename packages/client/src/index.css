@@ -67,11 +67,10 @@
 
   body {
     margin: 0;
-    /* Clean light canvas with a soft, low-key blue wash to the right. Fixed. */
+    /* Clean, mostly-neutral light canvas. The blue comes from the hero's
+       animated mesh blob, so keep the base wash very faint. Fixed. */
     background:
-      radial-gradient(720px 640px at 116% 22%, rgba(47, 107, 255, 0.16), transparent 62%),
-      radial-gradient(560px 520px at 98% 4%, rgba(47, 107, 255, 0.08), transparent 64%),
-      radial-gradient(680px 560px at -10% 4%, rgba(120, 160, 255, 0.06), transparent 62%),
+      radial-gradient(680px 560px at -10% 2%, rgba(120, 160, 255, 0.05), transparent 62%),
       linear-gradient(180deg, #fcfdff 0%, #f6f8fd 100%);
     background-attachment: fixed;
     color: var(--color-ink);
@@ -103,10 +102,10 @@
     height: 52vh;
     z-index: 0;
     pointer-events: none;
-    background: linear-gradient(135deg, rgba(47, 107, 255, 0.10), rgba(120, 160, 255, 0.05));
-    clip-path: polygon(100% 0, 100% 50%, 54% 0);
-    filter: blur(10px);
-    opacity: 0.5;
+    background: linear-gradient(135deg, rgba(47, 107, 255, 0.06), rgba(120, 160, 255, 0.03));
+    clip-path: polygon(100% 0, 100% 46%, 58% 0);
+    filter: blur(12px);
+    opacity: 0.35;
   }
 
   #root {

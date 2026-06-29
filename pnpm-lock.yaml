@@ -14,12 +14,15 @@ importers:
 
   packages/client:
     dependencies:
-      '@zipline/shared':
-        specifier: workspace:*
-        version: link:../shared
+      '@paper-design/shaders-react':
+        specifier: ^0.0.72
+        version: 0.0.72(@types/react@19.2.17)(react@19.2.7)
       '@radix-ui/react-slot':
         specifier: ^1.1.1
         version: 1.2.5(@types/react@19.2.17)(react@19.2.7)
+      '@zipline/shared':
+        specifier: workspace:*
+        version: link:../shared
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -84,15 +87,15 @@ importers:
 
   packages/server:
     dependencies:
-      '@zipline/shared':
-        specifier: workspace:*
-        version: link:../shared
       '@fastify/cors':
         specifier: ^10.0.1
         version: 10.1.0
       '@fastify/websocket':
         specifier: ^11.0.1
         version: 11.2.0
+      '@zipline/shared':
+        specifier: workspace:*
+        version: link:../shared
       fastify:
         specifier: ^5.2.0
         version: 5.8.5
@@ -707,6 +710,18 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@paper-design/shaders-react@0.0.72':
+    resolution: {integrity: sha512-q6KwquL93ZVNcuSM7pqzW0z/VLjnDVb/NSpYyGJBxf7MEHHCXx37E+zw/Px6RZLt3SGCUerIDDCGCMT385oW0w==}
+    peerDependencies:
+      '@types/react': ^18 || ^19
+      react: ^18 || ^19
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+
+  '@paper-design/shaders@0.0.72':
+    resolution: {integrity: sha512-rk2BFuV5ood2DaivbxJC2jQMzaB434isDUzdUQ85Cy0OWnUMuxl8kyGMR74TDPyjo3EvcHIyreNLkJdRG+GfSA==}
 
   '@pinojs/redact@0.4.0':
     resolution: {integrity: sha512-k2ENnmBugE/rzQfEcdWHcCY+/FM3VLzH9cYEsbdsoqrvzAKRhUZeRNhAZvB8OitQJ1TBed3yqWtdjzS6wJKBwg==}
@@ -2324,6 +2339,15 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@paper-design/shaders-react@0.0.72(@types/react@19.2.17)(react@19.2.7)':
+    dependencies:
+      '@paper-design/shaders': 0.0.72
+      react: 19.2.7
+    optionalDependencies:
+      '@types/react': 19.2.17
+
+  '@paper-design/shaders@0.0.72': {}
 
   '@pinojs/redact@0.4.0': {}
 
