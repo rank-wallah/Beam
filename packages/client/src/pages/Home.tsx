@@ -17,7 +17,8 @@ import { MeshGradient } from '@/components/MeshGradient';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Reveal } from '@/components/Reveal';
-import { SupportSection } from '@/components/landing/SupportSection';
+// import { SupportSection } from '@/components/landing/SupportSection'; // hidden for now — re-enable when needed
+import { Testimonials } from '@/components/landing/Testimonials';
 import { AboutDev } from '@/components/landing/AboutDev';
 import { Faq } from '@/components/landing/Faq';
 
@@ -154,8 +155,9 @@ export function HomePage() {
         </div>
       </Section>
 
+      <Testimonials />
       <Faq />
-      <SupportSection />
+      {/* <SupportSection /> */}
       <AboutDev />
 
       {/* ── Closing ──────────────────────────────────────────── */}
