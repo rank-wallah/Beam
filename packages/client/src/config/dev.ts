@@ -22,8 +22,9 @@ export const DEV_INFO: DevInfo = {
   tagline: 'Independent developer — I build fast, privacy-first web tools.',
   blurb:
     "Hi, I'm Deepansh — Zipline is my take on sending files directly between devices, without handing them to anyone's cloud. Everything is encrypted in your browser and streamed peer-to-peer. If it saved you an upload — or you just like the idea — a tip keeps independent projects like this going.",
-  // Drop your photo at packages/client/public/profile.jpg to show it here.
-  avatarUrl: '/profile.jpg',
+  // Avatar image. Tip: for long-term reliability, save the photo at
+  // packages/client/public/profile.jpg and set this to '/profile.jpg'.
+  avatarUrl: 'https://d2v119jmdj3sxo.cloudfront.net/102916_864994669',
   // TODO: replace with your own portfolio / homepage URL.
   portfolioUrl: 'https://example.com',
   // TODO: replace with your own social links.
