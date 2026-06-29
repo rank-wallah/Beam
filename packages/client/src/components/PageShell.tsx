@@ -1,5 +1,6 @@
-import type { ReactNode } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Brand } from './Brand';
 import { DEV_INFO } from '@/config/dev';
 
@@ -9,11 +10,25 @@ const NAV = [
   { href: '/#support', label: 'Support' },
 ];
 
+// Play the header's slide-in only on the first load (after the hero), not on
+// every internal navigation.
+let introPlayed = false;
+
 /** Shared page chrome: minimal header, centered column, quiet footer. */
 export function PageShell({ children, narrow = false }: { children: ReactNode; narrow?: boolean }) {
+  const [delay] = useState(() => (introPlayed ? 0 : 1));
+  useEffect(() => {
+    introPlayed = true;
+  }, []);
+
   return (
     <div className="flex min-h-full flex-col">
-      <header className="sticky top-0 z-30 border-b border-black/[0.08] bg-[var(--color-paper)]/70 backdrop-blur-xl">
+      <motion.header
+        initial={{ opacity: 0, y: -18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
+        className="sticky top-0 z-30 border-b border-black/[0.08] bg-[var(--color-paper)]/70 backdrop-blur-xl"
+      >
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
           <Brand />
           <nav className="flex items-center gap-7">
@@ -34,7 +49,7 @@ export function PageShell({ children, narrow = false }: { children: ReactNode; n
             </Link>
           </nav>
         </div>
-      </header>
+      </motion.header>
 
       <main className="mx-auto w-full flex-1 px-6 py-14 sm:py-20">
         <div className={narrow ? 'mx-auto max-w-2xl' : 'mx-auto max-w-6xl'}>{children}</div>

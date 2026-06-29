@@ -57,7 +57,7 @@ export function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease }}
+            transition={{ duration: 0.7, ease, delay: 0.55 }}
             className="flex justify-center"
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/60 px-4 py-1.5 text-xs font-medium tracking-wide text-[var(--color-ink-soft)] shadow-sm backdrop-blur-md">
@@ -69,7 +69,7 @@ export function HomePage() {
           <motion.h1
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease, delay: 0.12 }}
+            transition={{ duration: 0.9, ease, delay: 0 }}
             className="mt-7 text-[3rem] leading-[1.0] tracking-[-0.025em] sm:text-[5.25rem] lg:text-[6.75rem] lg:leading-[0.95]"
           >
             Send files, <span className="script text-[var(--color-signal-deep)]">privately.</span>
@@ -78,7 +78,7 @@ export function HomePage() {
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease, delay: 0.26 }}
+            transition={{ duration: 0.8, ease, delay: 0.7 }}
             className="mx-auto mt-8 max-w-lg text-base font-normal leading-relaxed text-[var(--color-ink-soft)] sm:text-lg"
           >
             Encrypted in your browser. Sent straight to the other device. No cloud,
@@ -88,7 +88,7 @@ export function HomePage() {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease, delay: 0.34 }}
+            transition={{ duration: 0.8, ease, delay: 0.82 }}
             className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <Button asChild size="lg">
