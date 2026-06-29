@@ -11,7 +11,7 @@
  * gaps. The same `resume-request` mechanism bootstraps a fresh transfer (where
  * "missing" is everything).
  */
-import type { ManifestMessage, ControlMessage } from '@beam/shared';
+import type { ManifestMessage, ControlMessage } from '@zipline/shared';
 import { decryptChunk, sha256, base64UrlToBytes, bytesEqual } from '../crypto/index.js';
 import type { Transport } from '../webrtc/transport.js';
 import { ChunkReassembler } from './framing.js';

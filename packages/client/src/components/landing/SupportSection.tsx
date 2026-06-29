@@ -12,7 +12,7 @@ export function SupportSection() {
           Free and open. Tips keep it alive.
         </h2>
         <p className="mt-5 max-w-lg text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
-          No ads, no accounts, no stored files — nothing to sell. If Beam helped, a small
+          No ads, no accounts, no stored files — nothing to sell. If Zipline helped, a small
           crypto tip means a lot.
         </p>
       </Reveal>

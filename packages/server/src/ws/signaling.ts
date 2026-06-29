@@ -13,7 +13,7 @@
  * ── Horizontal scaling ────────────────────────────────────────
  * Two peers in the same room may be connected to *different* server instances.
  * To relay between them we use Redis pub/sub: every message destined for a room
- * is published to `beam:relay:{roomId}`. Every instance subscribes to the rooms
+ * is published to `zipline:relay:{roomId}`. Every instance subscribes to the rooms
  * it has local members in, and on receipt fans the message out to its local
  * sockets (honouring an `exclude` peer so a sender never gets its own message
  * echoed back). Redis remains the single source of truth for room lifecycle.
@@ -25,7 +25,7 @@ import type {
   ClientToServerMessage,
   ServerToClientMessage,
   SignalingErrorCode,
-} from '@beam/shared';
+} from '@zipline/shared';
 import { RoomStore } from '../rooms/roomStore.js';
 
 /** URL-friendly room codes without visually ambiguous characters. */
@@ -35,7 +35,7 @@ const makePeerId = customAlphabet(
   16,
 );
 
-const RELAY_CHANNEL_PREFIX = 'beam:relay:';
+const RELAY_CHANNEL_PREFIX = 'zipline:relay:';
 
 /** Envelope published to Redis for fan-out to a room's local sockets. */
 interface RelayEnvelope {
@@ -177,7 +177,7 @@ export class SignalingHub {
   private async onSignal(
     peer: PeerConnection,
     roomId: string,
-    data: import('@beam/shared').SignalPayload,
+    data: import('@zipline/shared').SignalPayload,
   ): Promise<void> {
     if (peer.roomId !== roomId) {
       return this.sendError(peer, 'not-in-room', 'You are not in that room.');

@@ -5,7 +5,7 @@
  * WebSocket — and notably it carries no secret. TURN credentials (when the
  * deployment uses TURN) are short-lived/relay-only and never expose file data.
  */
-import type { IceConfigResponse } from '@beam/shared';
+import type { IceConfigResponse } from '@zipline/shared';
 
 export async function fetchIceServers(
   signalingBaseUrl: string,

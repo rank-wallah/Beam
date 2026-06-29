@@ -6,7 +6,7 @@
  * multi-receiver orchestration can be exercised without a real browser or
  * WebRTC stack.
  */
-import type { PeerRole } from '@beam/shared';
+import type { PeerRole } from '@zipline/shared';
 import type { SignalingClient } from '../signaling/signalingClient.js';
 import type { PeerConnection } from '../webrtc/index.js';
 

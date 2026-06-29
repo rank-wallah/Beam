@@ -10,7 +10,7 @@
  * Once `channel-open` fires, the signaling server has done its job and the
  * bulk transfer proceeds peer-to-peer with no further server involvement.
  */
-import type { PeerRole, SignalPayload } from '@beam/shared';
+import type { PeerRole, SignalPayload } from '@zipline/shared';
 import { Emitter } from '../events.js';
 import { DataChannelTransport } from './dataChannel.js';
 import type { SignalingClient } from '../signaling/signalingClient.js';
@@ -23,7 +23,7 @@ type ConnectionEvents = {
   failed: void;
 };
 
-const DATA_CHANNEL_LABEL = 'beam';
+const DATA_CHANNEL_LABEL = 'zipline';
 
 export class PeerConnection {
   private readonly pc: RTCPeerConnection;

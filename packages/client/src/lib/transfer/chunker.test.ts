@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { FileChunker } from './chunker.js';
-import { CHUNK_SIZE } from '@beam/shared';
+import { CHUNK_SIZE } from '@zipline/shared';
 
 /** Build a File of `size` bytes with deterministic content. */
 function makeFile(name: string, size: number): File {

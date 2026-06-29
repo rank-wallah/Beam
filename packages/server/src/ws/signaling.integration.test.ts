@@ -3,7 +3,7 @@ import RedisMock from 'ioredis-mock';
 import type { Redis } from 'ioredis';
 import type { AddressInfo } from 'node:net';
 import { buildApp, type BuiltApp } from '../app.js';
-import type { ServerToClientMessage } from '@beam/shared';
+import type { ServerToClientMessage } from '@zipline/shared';
 
 /**
  * Full signaling handshake over real WebSockets against the Fastify app,

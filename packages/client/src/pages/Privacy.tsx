@@ -5,7 +5,7 @@ export function PrivacyPage() {
   return (
     <LegalLayout title="Privacy Policy" updated="June 2026">
       <p className="text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
-        Beam is built to collect as little as technically possible. There are no accounts, no
+        Zipline is built to collect as little as technically possible. There are no accounts, no
         tracking, and your files are never uploaded to us. This policy explains the few things the
         service does touch.
       </p>
@@ -13,7 +13,7 @@ export function PrivacyPage() {
       <LegalSection title="Your files never reach our servers">
         <p>
           Files are encrypted in your browser and sent directly to the recipient over an encrypted
-          peer-to-peer (WebRTC) connection. Beam's servers never receive, store, or have access to
+          peer-to-peer (WebRTC) connection. Zipline's servers never receive, store, or have access to
           your files or the encryption keys. The key lives only in the share link's URL fragment,
           which browsers never transmit to a server.
         </p>
@@ -43,7 +43,7 @@ export function PrivacyPage() {
 
       <LegalSection title="No cookies, no analytics, no ads">
         <p>
-          Beam does not use advertising, third-party analytics, or tracking cookies. There is nothing
+          Zipline does not use advertising, third-party analytics, or tracking cookies. There is nothing
           to profile and nothing to sell.
         </p>
       </LegalSection>
@@ -51,7 +51,7 @@ export function PrivacyPage() {
       <LegalSection title="Donations">
         <p>
           Crypto donations are entirely optional. Blockchain addresses and transactions are public by
-          nature; Beam does not collect identity information for donations.
+          nature; Zipline does not collect identity information for donations.
         </p>
       </LegalSection>
 

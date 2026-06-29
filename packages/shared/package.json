@@ -1,9 +1,9 @@
 {
-  "name": "@beam/shared",
+  "name": "@zipline/shared",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Shared wire contracts (signaling + datachannel protocol) and constants for Beam.",
+  "description": "Shared wire contracts (signaling + datachannel protocol) and constants for Zipline.",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
@@ -15,6 +15,6 @@
   "scripts": {
     "build": "tsc -p tsconfig.json --noEmit",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "echo \"(no tests in @beam/shared)\" && exit 0"
+    "test": "echo \"(no tests in @zipline/shared)\" && exit 0"
   }
 }

@@ -7,11 +7,11 @@
  * receiver's browser. Browsers never transmit the fragment to a server, so the
  * signaling backend only ever sees the room id.
  *
- *   https://beam.app/r/abc123#<base64url-key>
+ *   https://zipline.app/r/abc123#<base64url-key>
  *                      └─room┘ └────key────┘
  *                      server    client-only
  */
-import { AES_KEY_BITS } from '@beam/shared';
+import { AES_KEY_BITS } from '@zipline/shared';
 import { bytesToBase64Url, base64UrlToBytes, asBufferSource } from './encoding.js';
 
 const ALGORITHM = 'AES-GCM';

@@ -14,7 +14,7 @@ importers:
 
   packages/client:
     dependencies:
-      '@beam/shared':
+      '@zipline/shared':
         specifier: workspace:*
         version: link:../shared
       '@radix-ui/react-slot':
@@ -84,7 +84,7 @@ importers:
 
   packages/server:
     dependencies:
-      '@beam/shared':
+      '@zipline/shared':
         specifier: workspace:*
         version: link:../shared
       '@fastify/cors':

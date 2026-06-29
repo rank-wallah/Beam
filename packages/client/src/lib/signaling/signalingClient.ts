@@ -1,7 +1,7 @@
 /**
  * Typed WebSocket signaling client.
  *
- * Wraps the browser WebSocket with: the @beam/shared message contracts,
+ * Wraps the browser WebSocket with: the @zipline/shared message contracts,
  * promise-based room create/join, an event surface for presence + relayed
  * signals, and automatic reconnect with exponential backoff. The reconnect
  * matters because a brief signaling blip during the ICE dance (or later, when
@@ -16,7 +16,7 @@ import type {
   ServerToClientMessage,
   SignalPayload,
   PeerRole,
-} from '@beam/shared';
+} from '@zipline/shared';
 import { Emitter } from '../events.js';
 
 type SignalingEvents = {

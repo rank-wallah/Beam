@@ -50,7 +50,7 @@ export function PageShell({ children, narrow = false }: { children: ReactNode; n
           </div>
           <hr className="rule my-7" />
           <div className="flex flex-col gap-4 text-sm text-[var(--color-ink-faint)] sm:flex-row sm:items-center sm:justify-between">
-            <span>© {new Date().getFullYear()} Beam</span>
+            <span>© {new Date().getFullYear()} Zipline</span>
             <nav className="flex items-center gap-6">
               <Link to="/privacy" className="link-ul hover:text-[var(--color-ink)]">
                 Privacy

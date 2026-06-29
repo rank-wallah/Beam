@@ -13,7 +13,7 @@
  */
 import type { Redis } from 'ioredis';
 
-const ROOM_PREFIX = 'beam:room:';
+const ROOM_PREFIX = 'zipline:room:';
 const MAX_MEMBERS = 2;
 
 export interface RoomRecord {

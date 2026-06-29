@@ -1,6 +1,6 @@
 /**
  * Signaling protocol — messages exchanged over the WebSocket between a
- * browser and the Beam signaling server.
+ * browser and the Zipline signaling server.
  *
  * The server is a *blind relay*: it creates/joins rooms, tracks presence,
  * and forwards opaque `signal` payloads (SDP + ICE) between the two members
@@ -101,7 +101,7 @@ export type SignalPayload =
   | { kind: 'ice'; candidate: RTCIceCandidateInitLike | null };
 
 /**
- * Minimal structural mirror of the browser DTOs so @beam/shared stays free
+ * Minimal structural mirror of the browser DTOs so @zipline/shared stays free
  * of DOM lib types (it is consumed by the Node server too).
  */
 export interface RTCSessionDescriptionInitLike {

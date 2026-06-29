@@ -1,7 +1,7 @@
 /**
  * Crypto + transfer constants shared by client and server.
  *
- * These live in @beam/shared so the sender, receiver, and (where relevant)
+ * These live in @zipline/shared so the sender, receiver, and (where relevant)
  * the signaling server agree on the exact same numbers. The server never
  * uses the key material — it only needs the structural constants if it ever
  * validates message shapes.
