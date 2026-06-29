@@ -31,8 +31,8 @@ export function DropZone({ onFiles }: { onFiles: (files: File[]) => void }) {
       className={cn(
         'relative flex flex-col items-center justify-center gap-5 rounded-[var(--radius-card)] border border-dashed px-6 py-16 text-center transition-colors',
         dragging
-          ? 'border-white/40 bg-white/[0.05]'
-          : 'border-[var(--color-line-strong)] bg-white/[0.02]',
+          ? 'border-[var(--color-signal)] bg-black/[0.04]'
+          : 'border-[var(--color-line-strong)] bg-black/[0.03]',
       )}
     >
       <div className="dotgrid pointer-events-none absolute inset-0 rounded-[var(--radius-card)] opacity-20" />

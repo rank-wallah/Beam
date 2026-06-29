@@ -2,10 +2,9 @@
 
 /*
  * ─────────────────────────────────────────────────────────────────────────
- * ZIPLINE — quiet, editorial, premium. Linear/Vercel restraint. Monochrome
- * luxury: near-black canvas, off-white ink, silver/white accent (no blue, no
- * orange). Color is carried by the Three.js hero centerpiece, not the UI.
- * Glass surfaces, generous negative space, hairline rules.
+ * ZIPLINE — light, minimal, glassy. Soft gradient canvas, frosted glass
+ * surfaces with backdrop-blur, hairline borders, generous negative space.
+ * A single indigo accent carries primary actions; emerald marks secure/done.
  * Display: Libre Caslon Text. Text/UI: Manrope.
  * ─────────────────────────────────────────────────────────────────────────
  */
@@ -14,24 +13,24 @@
   --font-sans: 'Manrope', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
 
-  /* Canvas + ink (near-black, faint cool neutral) */
-  --color-paper: #070708;
-  --color-panel: #0f0f12;
-  --color-paper-2: #17171b;
-  --color-ink: #f4f4f6;
-  --color-ink-soft: #9a9aa3;
-  --color-ink-faint: #5e5e67;
-  --color-line: #1b1b1f;
-  --color-line-strong: #2c2c33;
+  /* Canvas + ink (light; the gradient mesh is drawn on the body) */
+  --color-paper: #eef1fa;
+  --color-panel: #ffffff;
+  --color-paper-2: #f5f7fc;
+  --color-ink: #15171f;
+  --color-ink-soft: #51545f;
+  --color-ink-faint: #888c99;
+  --color-line: rgba(20, 24, 60, 0.10);
+  --color-line-strong: rgba(20, 24, 60, 0.18);
 
-  /* Monochrome base accent (white is the primary action color) */
-  --color-signal: #f4f4f6;
-  --color-signal-deep: #d6d6db;
-  /* Single chromatic accent — refined emerald, used only for secure/live cues */
-  --color-mint: #54d6a6;
-  --color-mint-deep: #2bbd8a;
-  --color-positive: #54d6a6;
-  --color-danger: #f0686a;
+  /* Indigo — the primary action + accent color. */
+  --color-signal: #6366f1;
+  --color-signal-deep: #4f46e5;
+  /* Emerald — secure / live / verified cues. */
+  --color-mint: #0fb98a;
+  --color-mint-deep: #0a9b73;
+  --color-positive: #0fb98a;
+  --color-danger: #e5484d;
 
   --radius-card: 16px;
 }
@@ -52,7 +51,7 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   html {
@@ -68,7 +67,13 @@
 
   body {
     margin: 0;
-    background-color: var(--color-paper);
+    /* Soft pastel gradient mesh — the glassy canvas. Fixed so it stays put. */
+    background:
+      radial-gradient(880px 620px at 8% -10%, rgba(99, 102, 241, 0.22), transparent 60%),
+      radial-gradient(820px 600px at 102% 4%, rgba(236, 72, 153, 0.14), transparent 56%),
+      radial-gradient(900px 720px at 50% 116%, rgba(56, 189, 248, 0.18), transparent 60%),
+      linear-gradient(180deg, #eef1fa 0%, #f6f7fc 60%, #eef1fa 100%);
+    background-attachment: fixed;
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-weight: 400;
@@ -77,25 +82,30 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Whisper-quiet film grain for depth. */
+  /* Whisper-quiet grain for texture over the gradient. */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.4;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
   }
 
-  /* Soft cinematic glow, top-center. */
+  /* A crisp clip-path gradient shard, top-right — quiet geometric accent. */
   body::after {
     content: '';
     position: fixed;
-    inset: 0;
+    top: 0;
+    right: 0;
+    width: 46vw;
+    height: 60vh;
     z-index: 0;
     pointer-events: none;
-    background: radial-gradient(1000px 560px at 50% -14%, rgba(255, 255, 255, 0.06), transparent 72%);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.16), rgba(236, 72, 153, 0.10));
+    clip-path: polygon(100% 0, 100% 64%, 38% 0);
+    opacity: 0.8;
   }
 
   #root {
@@ -104,8 +114,8 @@
   }
 
   ::selection {
-    background: rgba(255, 255, 255, 0.22);
-    color: #fff;
+    background: rgba(99, 102, 241, 0.22);
+    color: var(--color-ink);
   }
 
   h1, h2, h3 {
@@ -156,10 +166,13 @@
   border-top: 1px solid var(--color-line);
 }
 
-/* Glass surface — the premium card treatment (no blur: keeps scroll smooth). */
+/* Frosted glass surface — translucent white + backdrop blur + soft shadow. */
 .glass {
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: 0 10px 40px -16px rgba(30, 40, 90, 0.28);
 }
 
 /* Soft edge-fade mask for the WebGL canvas so it dissolves into the page. */

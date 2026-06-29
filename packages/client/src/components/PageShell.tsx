@@ -13,7 +13,7 @@ const NAV = [
 export function PageShell({ children, narrow = false }: { children: ReactNode; narrow?: boolean }) {
   return (
     <div className="flex min-h-full flex-col">
-      <header className="sticky top-0 z-30 border-b border-white/[0.06] bg-[var(--color-paper)]/70 backdrop-blur-xl">
+      <header className="sticky top-0 z-30 border-b border-black/[0.08] bg-[var(--color-paper)]/70 backdrop-blur-xl">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
           <Brand />
           <nav className="flex items-center gap-7">
@@ -28,7 +28,7 @@ export function PageShell({ children, narrow = false }: { children: ReactNode; n
             ))}
             <Link
               to="/send"
-              className="rounded-[10px] border border-white/12 bg-white/[0.03] px-4 py-2 text-sm font-medium text-[var(--color-ink)] transition-colors hover:bg-white/[0.07]"
+              className="rounded-[10px] border border-black/10 bg-black/[0.03] px-4 py-2 text-sm font-medium text-[var(--color-ink)] transition-colors hover:bg-black/[0.05]"
             >
               Send a file
             </Link>
@@ -40,7 +40,7 @@ export function PageShell({ children, narrow = false }: { children: ReactNode; n
         <div className={narrow ? 'mx-auto max-w-2xl' : 'mx-auto max-w-6xl'}>{children}</div>
       </main>
 
-      <footer className="border-t border-white/[0.06]">
+      <footer className="border-t border-black/[0.08]">
         <div className="mx-auto w-full max-w-6xl px-6 py-10">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <Brand />

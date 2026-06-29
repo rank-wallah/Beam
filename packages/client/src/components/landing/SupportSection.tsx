@@ -5,7 +5,7 @@ import { DONATION_WALLETS } from '@/config/dev';
 /** "Support the dev" — crypto donation wallets with addresses + QR codes. */
 export function SupportSection() {
   return (
-    <section id="support" className="scroll-mt-24 border-t border-white/[0.06] py-24">
+    <section id="support" className="scroll-mt-24 border-t border-black/[0.08] py-24">
       <Reveal>
         <p className="eyebrow text-[var(--color-ink-faint)]">Support</p>
         <h2 className="mt-4 max-w-2xl text-[2.1rem] leading-tight sm:text-[2.75rem]">
