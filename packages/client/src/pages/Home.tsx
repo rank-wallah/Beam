@@ -47,9 +47,7 @@ export function HomePage() {
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[130%] w-screen -translate-x-1/2 -translate-y-1/2 overflow-hidden"
         >
-          <div className="absolute -right-[14%] -top-[40%] h-[190%] w-[95%]">
-            <MeshGradient className="h-full w-full" />
-          </div>
+          <MeshGradient className="absolute inset-0 h-full w-full" />
         </div>
 
         {/* Copy — centered editorial */}
