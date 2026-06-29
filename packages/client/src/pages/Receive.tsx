@@ -83,7 +83,7 @@ export function ReceivePage() {
                     {files.map((f) => (
                       <li
                         key={f.name}
-                        className="flex items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2.5"
+                        className="flex items-center gap-3 rounded-xl border border-black/[0.08] bg-black/[0.03] px-3 py-2.5"
                       >
                         <span className="flex-1 truncate text-sm text-[var(--color-ink)]">{f.name}</span>
                         <span className="text-xs text-[var(--color-ink-faint)]">{formatBytes(f.size)}</span>

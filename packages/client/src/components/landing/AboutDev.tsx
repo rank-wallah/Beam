@@ -21,7 +21,7 @@ export function AboutDev() {
   const [showAvatar, setShowAvatar] = useState(Boolean(DEV_INFO.avatarUrl));
 
   return (
-    <section id="about" className="scroll-mt-24 border-t border-white/[0.06] py-24">
+    <section id="about" className="scroll-mt-24 border-t border-black/[0.08] py-24">
       <Reveal>
         <p className="eyebrow text-[var(--color-ink-faint)]">About</p>
         <Card className="mt-8">
@@ -31,10 +31,10 @@ export function AboutDev() {
                 src={DEV_INFO.avatarUrl}
                 alt={DEV_INFO.name}
                 onError={() => setShowAvatar(false)}
-                className="h-16 w-16 rounded-full border border-white/12 object-cover"
+                className="h-16 w-16 rounded-full border border-black/10 object-cover"
               />
             ) : (
-              <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] font-display text-2xl text-[var(--color-ink)]">
+              <span className="flex h-16 w-16 items-center justify-center rounded-full border border-black/10 bg-black/[0.04] font-display text-2xl text-[var(--color-ink)]">
                 {initials}
               </span>
             )}

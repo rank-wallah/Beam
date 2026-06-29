@@ -47,7 +47,7 @@ export function HomePage() {
         >
           <div
             className="animate-float-slow absolute left-1/2 top-[46%] h-[58rem] w-[58rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[150px]"
-            style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.055), transparent 60%)' }}
+            style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.16), transparent 60%)' }}
           />
           <div className="dotgrid absolute inset-0 opacity-[0.08] [mask-image:radial-gradient(ellipse_55%_55%_at_50%_46%,#000,transparent_82%)]" />
         </div>
@@ -110,13 +110,13 @@ export function HomePage() {
         <div className="mt-14 grid gap-4 sm:grid-cols-3">
           {HOW.map((step, i) => (
             <Reveal key={step.n} delay={i * 0.08}>
-              <Card className="group/card h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.14] hover:bg-white/[0.04]">
+              <Card className="group/card h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-black/[0.14] hover:bg-black/[0.04]">
                 <CardContent className="relative p-7">
-                  <span className="serif pointer-events-none absolute -right-1 -top-4 select-none text-[6.5rem] leading-none text-white/[0.045] transition-colors duration-300 group-hover/card:text-white/[0.07]">
+                  <span className="serif pointer-events-none absolute -right-1 -top-4 select-none text-[6.5rem] leading-none text-black/[0.05] transition-colors duration-300 group-hover/card:text-black/[0.08]">
                     {step.n}
                   </span>
                   <div className="relative">
-                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.04] text-[var(--color-ink)] transition-colors duration-300 group-hover/card:border-white/20">
+                    <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-black/[0.08] bg-black/[0.04] text-[var(--color-ink)] transition-colors duration-300 group-hover/card:border-black/20">
                       <step.icon className="h-[22px] w-[22px]" strokeWidth={1.5} />
                     </span>
                     <h3 className="mt-5 font-display text-xl">{step.title}</h3>
@@ -137,8 +137,8 @@ export function HomePage() {
         <div className="mx-auto mt-14 grid max-w-4xl gap-x-14 gap-y-10 text-left sm:grid-cols-2">
           {SECURITY.map((item, i) => (
             <Reveal key={item.k} delay={i * 0.06}>
-              <div className="flex gap-4 border-t border-white/[0.08] pt-5">
-                <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.04] text-[var(--color-ink)]">
+              <div className="flex gap-4 border-t border-black/[0.08] pt-5">
+                <span className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-black/[0.08] bg-black/[0.04] text-[var(--color-ink)]">
                   <item.icon className="h-5 w-5" strokeWidth={1.5} />
                 </span>
                 <div>
@@ -160,10 +160,10 @@ export function HomePage() {
       {/* ── Closing ──────────────────────────────────────────── */}
       <section className="py-24">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[28px] border border-white/[0.08] bg-white/[0.02] px-8 py-20 text-center">
+          <div className="relative overflow-hidden rounded-[28px] border border-black/[0.08] bg-black/[0.03] px-8 py-20 text-center">
             <div
               className="pointer-events-none absolute inset-x-0 top-0 h-48"
-              style={{ background: 'radial-gradient(460px 180px at 50% 0, rgba(255,255,255,0.1), transparent 70%)' }}
+              style={{ background: 'radial-gradient(460px 180px at 50% 0, rgba(99,102,241,0.14), transparent 70%)' }}
             />
             <div className="relative">
               <h2 className="mx-auto max-w-xl text-[2.2rem] leading-tight sm:text-[3rem]">

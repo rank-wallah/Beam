@@ -110,7 +110,7 @@ function ShareAndProgress({
               <div className="min-w-0 flex-1 space-y-4">
                 <div className="space-y-1.5">
                   <span className="eyebrow text-[var(--color-ink-faint)]">Share link</span>
-                  <code className="block w-full truncate rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-2.5 font-mono text-xs text-[var(--color-ink-soft)]">
+                  <code className="block w-full truncate rounded-lg border border-black/[0.08] bg-black/[0.03] px-3 py-2.5 font-mono text-xs text-[var(--color-ink-soft)]">
                     {sender.room.shareUrl}
                   </code>
                 </div>

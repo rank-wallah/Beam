@@ -1,6 +1,6 @@
 /**
- * Button — minimal, premium. White primary on dark (the calm, confident
- * choice), quiet glass/ghost secondaries. Generous hit targets, ~100ms feel.
+ * Button — minimal, premium. Dark ink primary on light, frosted-glass
+ * secondaries, indigo accent. Generous hit targets, ~100ms feel.
  */
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
@@ -13,15 +13,15 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          'bg-[var(--color-ink)] text-[#070b16] hover:bg-white',
+          'bg-[var(--color-ink)] text-white shadow-sm hover:opacity-90',
         secondary:
-          'border border-white/12 bg-white/[0.03] text-[var(--color-ink)] hover:bg-white/[0.07]',
+          'border border-white/60 bg-white/60 text-[var(--color-ink)] shadow-sm backdrop-blur-md hover:bg-white/80',
         ghost:
-          'text-[var(--color-ink-soft)] hover:bg-white/[0.05] hover:text-[var(--color-ink)]',
+          'text-[var(--color-ink-soft)] hover:bg-black/[0.05] hover:text-[var(--color-ink)]',
         outline:
-          'border border-white/12 text-[var(--color-ink)] hover:border-white/25',
+          'border border-[var(--color-line-strong)] text-[var(--color-ink)] hover:border-[var(--color-ink)]',
         accent:
-          'bg-[var(--color-signal)] text-white hover:bg-[var(--color-signal-deep)]',
+          'bg-[var(--color-signal)] text-white shadow-sm hover:bg-[var(--color-signal-deep)]',
       },
       size: {
         sm: 'h-9 px-4 text-[0.8125rem]',
