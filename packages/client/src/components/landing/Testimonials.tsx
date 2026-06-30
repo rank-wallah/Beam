@@ -1,12 +1,10 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { Reveal } from '@/components/Reveal';
+import { InfiniteSlider } from '@/components/ui/infinite-slider';
 
 type Testimonial = { quote: string; name: string; role: string };
 
 const TESTIMONIALS: Testimonial[] = [
   {
-    quote:
-      'Sent a 4GB video to a client in seconds — no upload, no Drive link, no waiting for it to process.',
+    quote: 'Sent a 4GB video to a client in seconds — no upload, no Drive link, no waiting to process.',
     name: 'Aarav Mehta',
     role: 'Video Editor',
   },
@@ -22,24 +20,38 @@ const TESTIMONIALS: Testimonial[] = [
     role: 'Product Manager',
   },
   {
-    quote:
-      'Open the page, drop a file, share the link. That’s it. The simplest transfer tool I’ve used.',
+    quote: 'Open the page, drop a file, share the link. That’s it. The simplest transfer tool I’ve used.',
     name: 'Priya R.',
     role: 'Designer',
   },
   {
-    quote:
-      'I send sensitive documents to my lawyer knowing the server literally never sees the contents.',
+    quote: 'I send sensitive documents knowing the server literally never sees the contents. Huge.',
     name: 'Marcus W.',
     role: 'Founder',
   },
   {
-    quote:
-      'My wifi dropped mid-transfer and it just resumed from where it left off. Didn’t start over.',
+    quote: 'My wifi dropped mid-transfer and it just resumed from where it left off. Didn’t start over.',
     name: 'Lena F.',
     role: 'Developer',
   },
+  {
+    quote: 'No file-size limits getting in my way. I just beam the whole folder across and move on.',
+    name: 'Tomás G.',
+    role: 'Photographer',
+  },
+  {
+    quote: 'Switched my whole team off email attachments. Faster, private, and zero setup.',
+    name: 'Ngozi A.',
+    role: 'Ops Lead',
+  },
+  {
+    quote: 'The fact that it’s peer-to-peer means even huge transfers fly. Genuinely impressed.',
+    name: 'Kenji T.',
+    role: 'Indie Hacker',
+  },
 ];
+
+const columns = [TESTIMONIALS.slice(0, 3), TESTIMONIALS.slice(3, 6), TESTIMONIALS.slice(6, 9)];
 
 function initials(name: string) {
   return name
@@ -51,38 +63,55 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-/** Social proof — quiet glass cards with a short quote and a name. */
+function TestimonialCard({ t }: { t: Testimonial }) {
+  return (
+    <figure className="w-72 rounded-2xl border border-black/[0.07] bg-white p-6 shadow-[0_8px_30px_-12px_rgba(30,40,90,0.18)]">
+      <blockquote className="text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
+        “{t.quote}”
+      </blockquote>
+      <figcaption className="mt-5 flex items-center gap-3">
+        <span className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 bg-black/[0.04] font-display text-xs text-[var(--color-ink)]">
+          {initials(t.name)}
+        </span>
+        <div className="leading-tight">
+          <cite className="text-sm font-medium not-italic text-[var(--color-ink)]">{t.name}</cite>
+          <p className="text-xs text-[var(--color-ink-faint)]">{t.role}</p>
+        </div>
+      </figcaption>
+    </figure>
+  );
+}
+
+/** Social proof — three vertically-scrolling columns of testimonials. */
 export function Testimonials() {
   return (
     <section id="testimonials" className="scroll-mt-24 py-14 sm:py-20">
-      <div className="text-center">
-        <p className="eyebrow text-[var(--color-ink-faint)]">Testimonials</p>
-        <h2 className="mt-4 text-[2.1rem] leading-tight sm:text-[2.75rem]">
-          Loved by people who send.
-        </h2>
+      <div className="mx-auto flex max-w-sm flex-col items-center gap-4 text-center">
+        <span className="inline-flex items-center rounded-full border border-black/10 bg-white/70 px-3.5 py-1.5 text-xs font-medium text-[var(--color-ink-soft)] shadow-sm">
+          Testimonials
+        </span>
+        <h2 className="text-[2.1rem] leading-tight sm:text-[2.5rem]">Loved by people who send.</h2>
+        <p className="text-sm text-[var(--color-ink-faint)]">
+          What people say after their first transfer.
+        </p>
       </div>
 
-      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {TESTIMONIALS.map((t, i) => (
-          <Reveal key={t.name} delay={(i % 3) * 0.06}>
-            <Card className="h-full">
-              <CardContent className="flex h-full flex-col gap-5 p-6">
-                <p className="text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
-                  “{t.quote}”
-                </p>
-                <div className="mt-auto flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-black/[0.04] font-display text-sm text-[var(--color-ink)]">
-                    {initials(t.name)}
-                  </span>
-                  <div className="leading-tight">
-                    <p className="text-sm font-medium text-[var(--color-ink)]">{t.name}</p>
-                    <p className="text-xs text-[var(--color-ink-faint)]">{t.role}</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </Reveal>
-        ))}
+      <div className="mt-12 flex max-h-[38rem] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_82%,transparent)]">
+        <InfiniteSlider direction="vertical" speed={28} speedOnHover={12}>
+          {columns[0]!.map((t) => (
+            <TestimonialCard key={t.name} t={t} />
+          ))}
+        </InfiniteSlider>
+        <InfiniteSlider className="hidden md:block" direction="vertical" speed={46} speedOnHover={20}>
+          {columns[1]!.map((t) => (
+            <TestimonialCard key={t.name} t={t} />
+          ))}
+        </InfiniteSlider>
+        <InfiniteSlider className="hidden lg:block" direction="vertical" speed={34} speedOnHover={16}>
+          {columns[2]!.map((t) => (
+            <TestimonialCard key={t.name} t={t} />
+          ))}
+        </InfiniteSlider>
       </div>
     </section>
   );
