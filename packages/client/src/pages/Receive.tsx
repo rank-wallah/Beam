@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Download, ShieldCheck, Loader2, AlertTriangle } from 'lucide-react';
+import { Download, ShieldCheck, Loader2, AlertTriangle, FileCheck2 } from 'lucide-react';
 import { PageShell } from '@/components/PageShell';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -35,11 +35,15 @@ export function ReceivePage() {
   return (
     <PageShell narrow>
       <div className="space-y-6">
-        <header className="space-y-2">
-          <h1 className="text-2xl font-semibold tracking-tight">Receiving files</h1>
-          <p className="text-sm text-[var(--color-ink-muted)]">
-            Room <code className="text-[var(--color-ink)]">{roomId}</code> — a direct, encrypted
-            connection to the sender.
+        <header className="space-y-3">
+          <span className="eyebrow text-[var(--color-ink-faint)]">Receiver</span>
+          <h1 className="font-display text-[2.4rem] leading-tight tracking-tight">Receiving files</h1>
+          <p className="text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
+            Room{' '}
+            <code className="rounded-md bg-black/[0.04] px-1.5 py-0.5 font-mono text-[0.85em] text-[var(--color-ink)]">
+              {roomId}
+            </code>{' '}
+            — a direct, encrypted connection to the sender.
           </p>
         </header>
 
@@ -83,10 +87,17 @@ export function ReceivePage() {
                     {files.map((f) => (
                       <li
                         key={f.name}
-                        className="flex items-center gap-3 rounded-xl border border-black/[0.08] bg-black/[0.03] px-3 py-2.5"
+                        className="flex items-center gap-3 rounded-xl border border-black/[0.06] bg-white/60 px-3 py-2.5 transition-colors hover:border-black/[0.12]"
                       >
-                        <span className="flex-1 truncate text-sm text-[var(--color-ink)]">{f.name}</span>
-                        <span className="text-xs text-[var(--color-ink-faint)]">{formatBytes(f.size)}</span>
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--color-positive)]/10 text-[var(--color-positive)]">
+                          <FileCheck2 className="h-4 w-4" strokeWidth={1.8} />
+                        </span>
+                        <div className="min-w-0 flex-1 leading-tight">
+                          <p className="truncate text-sm font-medium text-[var(--color-ink)]">{f.name}</p>
+                          <p className="font-mono text-xs text-[var(--color-ink-faint)]">
+                            {formatBytes(f.size)}
+                          </p>
+                        </div>
                         <Button size="sm" onClick={() => void f.save()}>
                           <Download className="h-4 w-4" /> Save
                         </Button>

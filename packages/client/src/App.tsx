@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
 import { BrowserSupportGate } from '@/components/BrowserSupportGate';
 
 const HomePage = lazy(() => import('@/pages/Home').then((m) => ({ default: m.HomePage })));
@@ -17,18 +18,20 @@ const TermsPage = lazy(() => import('@/pages/Terms').then((m) => ({ default: m.T
 export function App() {
   return (
     <BrowserSupportGate>
-      <BrowserRouter>
-        <Suspense fallback={null}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/send" element={<SendPage />} />
-            <Route path="/r/:roomId" element={<ReceivePage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/terms" element={<TermsPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
+      <MotionConfig reducedMotion="user">
+        <BrowserRouter>
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/send" element={<SendPage />} />
+              <Route path="/r/:roomId" element={<ReceivePage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </MotionConfig>
     </BrowserSupportGate>
   );
 }
