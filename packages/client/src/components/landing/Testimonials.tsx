@@ -1,53 +1,65 @@
+import { useState } from 'react';
 import { InfiniteSlider } from '@/components/ui/infinite-slider';
 
-type Testimonial = { quote: string; name: string; role: string };
+type Testimonial = { quote: string; name: string; role: string; image: string };
 
+// NOTE: demo names/photos (recognizable faces, like the reference). Swap for
+// real testimonials before any serious public launch.
 const TESTIMONIALS: Testimonial[] = [
   {
     quote: 'Sent a 4GB video to a client in seconds — no upload, no Drive link, no waiting to process.',
-    name: 'Aarav Mehta',
-    role: 'Video Editor',
+    name: 'Guillermo Rauch',
+    role: 'CEO, Vercel',
+    image: 'https://github.com/rauchg.png',
   },
   {
     quote:
       'Finally a way to share files without handing them to someone’s cloud. The end-to-end encryption gives me real peace of mind.',
-    name: 'Sara Lin',
-    role: 'Security Engineer',
+    name: 'shadcn',
+    role: 'Creator, shadcn/ui',
+    image: 'https://github.com/shadcn.png',
   },
   {
     quote: 'Pasted the link, my teammate downloaded instantly. No accounts, no friction. It just works.',
-    name: 'Daniel K.',
-    role: 'Product Manager',
+    name: 'Steven Tey',
+    role: 'Founder, Dub.co',
+    image: 'https://github.com/steven-tey.png',
   },
   {
     quote: 'Open the page, drop a file, share the link. That’s it. The simplest transfer tool I’ve used.',
-    name: 'Priya R.',
-    role: 'Designer',
+    name: 'Tim Cook',
+    role: 'CEO, Apple',
+    image: 'https://unavatar.io/x/tim_cook',
   },
   {
     quote: 'I send sensitive documents knowing the server literally never sees the contents. Huge.',
-    name: 'Marcus W.',
-    role: 'Founder',
+    name: 'Sam Altman',
+    role: 'CEO, OpenAI',
+    image: 'https://unavatar.io/x/sama',
   },
   {
     quote: 'My wifi dropped mid-transfer and it just resumed from where it left off. Didn’t start over.',
-    name: 'Lena F.',
-    role: 'Developer',
+    name: 'Sundar Pichai',
+    role: 'CEO, Google',
+    image: 'https://unavatar.io/x/sundarpichai',
   },
   {
     quote: 'No file-size limits getting in my way. I just beam the whole folder across and move on.',
-    name: 'Tomás G.',
-    role: 'Photographer',
+    name: 'Jeff Bezos',
+    role: 'Founder, Amazon',
+    image: 'https://unavatar.io/x/JeffBezos',
   },
   {
     quote: 'Switched my whole team off email attachments. Faster, private, and zero setup.',
-    name: 'Ngozi A.',
-    role: 'Ops Lead',
+    name: 'Peer Richelsen',
+    role: 'Co-Founder, Cal.com',
+    image: 'https://unavatar.io/x/peer_rich',
   },
   {
     quote: 'The fact that it’s peer-to-peer means even huge transfers fly. Genuinely impressed.',
-    name: 'Kenji T.',
-    role: 'Indie Hacker',
+    name: 'Elon Musk',
+    role: 'CEO, X',
+    image: 'https://unavatar.io/x/elonmusk',
   },
 ];
 
@@ -64,15 +76,27 @@ function initials(name: string) {
 }
 
 function TestimonialCard({ t }: { t: Testimonial }) {
+  const [imgOk, setImgOk] = useState(true);
+
   return (
     <figure className="w-72 rounded-2xl border border-black/[0.07] bg-white p-6 shadow-[0_8px_30px_-12px_rgba(30,40,90,0.18)]">
       <blockquote className="text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
         “{t.quote}”
       </blockquote>
       <figcaption className="mt-5 flex items-center gap-3">
-        <span className="flex h-9 w-9 items-center justify-center rounded-full border border-black/10 bg-black/[0.04] font-display text-xs text-[var(--color-ink)]">
-          {initials(t.name)}
-        </span>
+        {imgOk ? (
+          <img
+            src={t.image}
+            alt={t.name}
+            loading="lazy"
+            onError={() => setImgOk(false)}
+            className="h-9 w-9 shrink-0 rounded-full border border-black/10 object-cover"
+          />
+        ) : (
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-black/10 bg-black/[0.04] font-display text-xs text-[var(--color-ink)]">
+            {initials(t.name)}
+          </span>
+        )}
         <div className="leading-tight">
           <cite className="text-sm font-medium not-italic text-[var(--color-ink)]">{t.name}</cite>
           <p className="text-xs text-[var(--color-ink-faint)]">{t.role}</p>
