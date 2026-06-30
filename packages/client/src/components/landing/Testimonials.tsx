@@ -44,7 +44,7 @@ const TESTIMONIALS: Testimonial[] = [
     image: 'https://unavatar.io/x/sundarpichai',
   },
   {
-    quote: 'No file-size limits getting in my way. I just beam the whole folder across and move on.',
+    quote: 'No file-size limits getting in my way. I just send the whole folder across and move on.',
     name: 'Jeff Bezos',
     role: 'Founder, Amazon',
     image: 'https://unavatar.io/x/JeffBezos',

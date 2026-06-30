@@ -1,5 +1,5 @@
 import { useRef, useState, type DragEvent } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { UploadCloud, FolderUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { gatherFilesFromDataTransfer } from '@/lib/files';
@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils';
  */
 export function DropZone({ onFiles }: { onFiles: (files: File[]) => void }) {
   const [dragging, setDragging] = useState(false);
+  const reduce = useReducedMotion();
   const fileInput = useRef<HTMLInputElement>(null);
   const folderInput = useRef<HTMLInputElement>(null);
 
@@ -48,10 +49,14 @@ export function DropZone({ onFiles }: { onFiles: (files: File[]) => void }) {
           animate={
             dragging
               ? { opacity: 0.55, scale: 1.25 }
-              : { opacity: [0.18, 0.34, 0.18], scale: [1, 1.15, 1] }
+              : reduce
+                ? { opacity: 0.24, scale: 1 }
+                : { opacity: [0.18, 0.34, 0.18], scale: [1, 1.15, 1] }
           }
           transition={
-            dragging ? { duration: 0.3 } : { duration: 3.2, repeat: Infinity, ease: 'easeInOut' }
+            dragging || reduce
+              ? { duration: 0.3 }
+              : { duration: 3.2, repeat: Infinity, ease: 'easeInOut' }
           }
         />
         <motion.div
@@ -59,9 +64,11 @@ export function DropZone({ onFiles }: { onFiles: (files: File[]) => void }) {
             'relative flex h-14 w-14 items-center justify-center rounded-2xl border bg-white shadow-sm transition-colors',
             dragging ? 'border-[var(--color-signal)]' : 'border-[var(--color-line-strong)]',
           )}
-          animate={dragging ? { y: 0 } : { y: [0, -6, 0] }}
+          animate={dragging || reduce ? { y: 0 } : { y: [0, -6, 0] }}
           transition={
-            dragging ? { duration: 0.2 } : { duration: 3, repeat: Infinity, ease: 'easeInOut' }
+            dragging || reduce
+              ? { duration: 0.2 }
+              : { duration: 3, repeat: Infinity, ease: 'easeInOut' }
           }
         >
           <UploadCloud

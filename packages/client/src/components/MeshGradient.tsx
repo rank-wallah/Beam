@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useReducedMotion } from 'framer-motion';
 import { GrainGradient } from '@paper-design/shaders-react';
 
 /**
@@ -9,6 +10,7 @@ import { GrainGradient } from '@paper-design/shaders-react';
 export function MeshGradient({ className = '' }: { className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     const el = ref.current;
@@ -26,7 +28,7 @@ export function MeshGradient({ className = '' }: { className?: string }) {
         <GrainGradient
           colors={['#eff6ff', '#bfdbfe', '#60a5fa']}
           colorBack="#00000000"
-          speed={0.17}
+          speed={reduce ? 0 : 0.17}
           scale={0.57}
           rotation={-143}
           offsetX={0.2}
