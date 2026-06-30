@@ -177,6 +177,12 @@
   animation: float-slow 22s ease-in-out infinite reverse;
 }
 
+/* Faint dot grid texture (used behind the drop zone, etc.). */
+.dotgrid {
+  background-image: radial-gradient(rgba(20, 24, 60, 0.14) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
 .serif {
   font-family: var(--font-display);
 }
