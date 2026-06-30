@@ -161,7 +161,7 @@ export function HomePage() {
       <AboutDev />
 
       {/* ── Closing ──────────────────────────────────────────── */}
-      <section className="py-14">
+      <section className="py-10">
         <Reveal>
           <div className="relative overflow-hidden rounded-[28px] border border-black/[0.08] bg-black/[0.03] px-8 py-14 text-center">
             <div
@@ -191,7 +191,7 @@ export function HomePage() {
 /** A section — spacing only, no hard divider line. */
 function Section({ id, children }: { id: string; children: ReactNode }) {
   return (
-    <section id={id} className="scroll-mt-24 py-14 sm:py-20">
+    <section id={id} className="scroll-mt-24 py-10 sm:py-14">
       {children}
     </section>
   );

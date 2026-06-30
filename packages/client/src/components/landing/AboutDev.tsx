@@ -21,7 +21,7 @@ export function AboutDev() {
   const [showAvatar, setShowAvatar] = useState(Boolean(DEV_INFO.avatarUrl));
 
   return (
-    <section id="about" className="scroll-mt-24 border-t border-black/[0.08] py-24">
+    <section id="about" className="scroll-mt-24 border-t border-black/[0.08] py-14">
       <Reveal>
         <p className="eyebrow text-[var(--color-ink-faint)]">About</p>
         <Card className="mt-8">

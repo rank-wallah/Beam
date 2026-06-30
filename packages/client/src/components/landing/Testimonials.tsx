@@ -88,9 +88,9 @@ function TestimonialCard({ t }: { t: Testimonial }) {
           <img
             src={t.image}
             alt={t.name}
-            loading="lazy"
+            decoding="async"
             onError={() => setImgOk(false)}
-            className="h-9 w-9 shrink-0 rounded-full border border-black/10 object-cover"
+            className="h-9 w-9 shrink-0 rounded-full border border-black/10 bg-black/[0.04] object-cover"
           />
         ) : (
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-black/10 bg-black/[0.04] font-display text-xs text-[var(--color-ink)]">
@@ -109,12 +109,14 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 /** Social proof — three vertically-scrolling columns of testimonials. */
 export function Testimonials() {
   return (
-    <section id="testimonials" className="scroll-mt-24 py-14 sm:py-20">
+    <section id="testimonials" className="scroll-mt-24 py-10 sm:py-14">
       <div className="mx-auto flex max-w-sm flex-col items-center gap-4 text-center">
         <span className="inline-flex items-center rounded-full border border-black/10 bg-white/70 px-3.5 py-1.5 text-xs font-medium text-[var(--color-ink-soft)] shadow-sm">
           Testimonials
         </span>
-        <h2 className="text-[2.1rem] leading-tight sm:text-[2.5rem]">Loved by people who send.</h2>
+        <h2 className="text-[2.1rem] leading-tight sm:text-[2.5rem]">
+          Don’t just take our word for it.
+        </h2>
         <p className="text-sm text-[var(--color-ink-faint)]">
           What people say after their first transfer.
         </p>
