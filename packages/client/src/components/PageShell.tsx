@@ -30,7 +30,7 @@ export function PageShell({ children, narrow = false }: { children: ReactNode; n
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
         className="sticky top-0 z-30 border-b border-black/[0.04] bg-white/35 backdrop-blur-md"
       >
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-6">
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-6">
           <Brand />
           <nav className="flex items-center gap-7">
             {NAV.map((item) => (
@@ -53,11 +53,11 @@ export function PageShell({ children, narrow = false }: { children: ReactNode; n
       </motion.header>
 
       <main className="mx-auto w-full flex-1 px-6 py-7 sm:py-10">
-        <div className={narrow ? 'mx-auto max-w-2xl' : 'mx-auto max-w-6xl'}>{children}</div>
+        <div className={narrow ? 'mx-auto max-w-2xl' : 'mx-auto max-w-7xl'}>{children}</div>
       </main>
 
       <footer className="relative overflow-hidden border-t border-black/[0.08]">
-        <div className="mx-auto w-full max-w-6xl px-6 pt-12">
+        <div className="mx-auto w-full max-w-7xl px-6 pt-12">
           {/* Top row: brand + tagline · follow */}
           <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
             <div className="space-y-3">
